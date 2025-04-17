@@ -10,6 +10,10 @@ namespace Catalog.Domain.Entities
 
         public string Image { get; set; }
 
-        public int ParentCategory { get; set; }
+        public int? ParentCategoryId { get; set; }
+
+        public Category? ParentCategory { get; set; }
+
+        public ICollection<Category>? ChildCategories { get; set; }
     }
 }

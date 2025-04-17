@@ -1,0 +1,36 @@
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Catalog.Application.Common.Interfaces;
+using Catalog.Application.Models;
+using Catalog.Domain.Common;
+using MediatR;
+
+namespace Catalog.Application.Categories.Queries
+{
+    public class GetCategoriesWithPaginationQuery : IRequest<PaginatedList<CategoryDto>>
+    {
+        public int PageNumber { get; init; } = 1;
+        public int PageSize { get; init; } = 10;
+    }
+
+    public class GetTodoItemsWithPaginationQueryHandler : IRequestHandler<GetCategoriesWithPaginationQuery, PaginatedList<CategoryDto>>
+    {
+        private readonly IApplicationDbContext _context;
+        private readonly IMapper _mapper;
+
+        public GetTodoItemsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
+
+        public async Task<PaginatedList<CategoryDto>> Handle(GetCategoriesWithPaginationQuery request, CancellationToken cancellationToken)
+        {
+            return await _context.Categories
+                //.Where(x => x.ListId == request.ListId)
+                .OrderBy(x => x.Name)
+                .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
+                .PaginatedListAsync(request.PageNumber, request.PageSize);
+        }
+    }
+}
