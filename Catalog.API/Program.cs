@@ -44,7 +44,7 @@ namespace Catalog.API
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
 
-            //app.UseExceptionHandler(options => { });
+            app.UseExceptionHandler(options => { });
 
             //app.UseHttpsRedirection();
 

@@ -1,6 +1,4 @@
 ﻿using Catalog.Application.Common.Interfaces;
-using FluentValidation;
-using MediatR;
 
 namespace Catalog.Application.Categories.Commands
 {

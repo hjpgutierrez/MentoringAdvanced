@@ -1,8 +1,6 @@
-﻿using Catalog.API.Infrastructure;
-using Catalog.Application.Categories.Commands;
+﻿using Catalog.Application.Categories.Commands;
 using Catalog.Application.Categories.Queries;
 using Catalog.Application.Models;
-using MediatR;
 
 namespace Catalog.API.Controllers
 {

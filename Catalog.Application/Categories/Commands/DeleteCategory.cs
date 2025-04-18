@@ -1,5 +1,4 @@
 ﻿using Catalog.Application.Common.Interfaces;
-using MediatR;
 
 namespace Catalog.Application.Categories.Commands
 {

@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Catalog.Application.Common.Interfaces;
+﻿using Catalog.Application.Common.Interfaces;
 using Catalog.Application.Models;
 using Catalog.Domain.Common;
-using MediatR;
 
 namespace Catalog.Application.Categories.Queries
 {
@@ -27,7 +24,6 @@ namespace Catalog.Application.Categories.Queries
         public async Task<PaginatedList<CategoryDto>> Handle(GetCategoriesWithPaginationQuery request, CancellationToken cancellationToken)
         {
             return await _context.Categories
-                //.Where(x => x.ListId == request.ListId)
                 .OrderBy(x => x.Name)
                 .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
                 .PaginatedListAsync(request.PageNumber, request.PageSize);
