@@ -10,12 +10,18 @@ namespace Catalog.API.Controllers
         {
             app.MapGroup(this)
                 .MapGet(GetCategoriesWithPagination)
+                .MapGet(GetCategory, "{id}")
                 .MapPost(CreateCategory)
                 .MapPut(UpdateCategory, "{id}")
                 .MapDelete(DeleteCategory, "{id}");
         }
 
         public Task<PaginatedList<CategoryDto>> GetCategoriesWithPagination(ISender sender, [AsParameters] GetCategoriesWithPaginationQuery query)
+        {
+            return sender.Send(query);
+        }
+
+        public Task<CategoryDto> GetCategory(ISender sender, [AsParameters] GetCategoryQuery query)
         {
             return sender.Send(query);
         }

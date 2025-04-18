@@ -25,12 +25,7 @@ namespace Catalog.Infrastructure.Persistence
             {
                 property.SetPrecision(18);
                 property.SetScale(2);
-            }
-
-            //builder.Entity<Product>()
-            //        .HasOne(e => e.Category)
-            //        .WithOne(ed => ed.Product)
-            //        .HasForeignKey<Category>(ed => ed.ProductId);
+            }            
 
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
