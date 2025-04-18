@@ -15,7 +15,8 @@ namespace Catalog.Infrastructure.Persistence.Configurations
             builder.HasOne(x => x.ParentCategory)
                 .WithMany(x => x.ChildCategories)
                 .HasForeignKey(x => x.ParentCategoryId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction)
+                ;
         }
     }
 }

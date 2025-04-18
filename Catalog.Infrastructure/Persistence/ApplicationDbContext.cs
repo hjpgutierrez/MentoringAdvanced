@@ -12,10 +12,10 @@ namespace Catalog.Infrastructure.Persistence
         {
         }
 
-        DbSet<Category> IApplicationDbContext.Categories => Set<Category>();
+        public DbSet<Category> Categories => Set<Category>();
 
 
-        DbSet<Product> IApplicationDbContext.Products => Set<Product>();
+        public DbSet<Product> Products => Set<Product>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
