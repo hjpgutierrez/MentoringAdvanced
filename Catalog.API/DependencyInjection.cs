@@ -1,15 +1,17 @@
-﻿namespace Catalog.API
+﻿using Catalog.Infrastructure.Persistence;
+
+namespace Catalog.API
 {
     public static class DependencyInjection
     {
         public static IServiceCollection AddWebServices(this IServiceCollection services)
         {
-            //services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddHttpContextAccessor();
 
-            //services.AddHealthChecks()
-            //    .AddDbContextCheck<ApplicationDbContext>();
+            services.AddHealthChecks()
+                .AddDbContextCheck<ApplicationDbContext>();
 
             services.AddExceptionHandler<CustomExceptionHandler>();
 

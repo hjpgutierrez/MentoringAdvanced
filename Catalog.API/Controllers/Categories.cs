@@ -10,7 +10,7 @@ namespace Catalog.API.Controllers
     {
         public override void Map(WebApplication app)
         {
-            app.MapGroup(nameof(Categories))
+            app.MapGroup(this)
                 .MapGet(GetCategoriesWithPagination)
                 .MapPost(CreateCategory)
                 .MapPut(UpdateCategory, "{id}")

@@ -1,4 +1,7 @@
 
+using Catalog.Infrastructure;
+using Catalog.Application;
+
 namespace Catalog.API
 {
     public class Program
@@ -8,6 +11,9 @@ namespace Catalog.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddApplicationServices();
+            builder.Services.AddInfrastructureServices(builder.Configuration);
+            builder.Services.AddWebServices();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -23,10 +29,19 @@ namespace Catalog.API
                 app.UseSwaggerUI();
             }
 
+            app.UseHealthChecks("/health");
+
+            app.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
+
+            app.UseExceptionHandler(options => { });
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
+            app.MapEndpoints();
 
             app.MapControllers();
 

@@ -20,8 +20,9 @@ namespace Catalog.Infrastructure
 
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {            
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(connectionString, sqlOptions => sqlOptions.MigrationsAssembly("Catalog.Infrastructure"));
                 options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+                options.EnableDetailedErrors();                
             });
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());

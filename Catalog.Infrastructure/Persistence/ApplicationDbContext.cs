@@ -15,10 +15,23 @@ namespace Catalog.Infrastructure.Persistence
         DbSet<Category> IApplicationDbContext.Categories => Set<Category>();
 
 
-        //DbSet<Product> IApplicationDbContext.Products => Set<Product>();
+        DbSet<Product> IApplicationDbContext.Products => Set<Product>();
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            foreach (var property in builder.Model.GetEntityTypes()
+                .SelectMany(t => t.GetProperties())
+                .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
+            {
+                property.SetPrecision(18);
+                property.SetScale(2);
+            }
+
+            //builder.Entity<Product>()
+            //        .HasOne(e => e.Category)
+            //        .WithOne(ed => ed.Product)
+            //        .HasForeignKey<Category>(ed => ed.ProductId);
+
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }

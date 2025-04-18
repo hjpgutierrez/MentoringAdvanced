@@ -15,5 +15,8 @@ namespace Catalog.Domain.Entities
         public Category? ParentCategory { get; set; }
 
         public ICollection<Category>? ChildCategories { get; set; }
+
+        //public int ProductId { get; set; }
+        //public Product Product { get; set; }
     }
 }
