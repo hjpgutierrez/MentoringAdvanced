@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Catalog.Application.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Catalog.Application.Models;
 
 namespace Catalog.Domain.Common
 {
