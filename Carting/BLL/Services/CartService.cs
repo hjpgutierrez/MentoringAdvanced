@@ -1,6 +1,6 @@
-﻿using Carting.BLL.Models;
+﻿using Carting.BLL.Interfaces;
+using Carting.BLL.Models;
 using Carting.BLL.Validations;
-using Carting.DAL;
 
 namespace Carting.BLL.Services
 {

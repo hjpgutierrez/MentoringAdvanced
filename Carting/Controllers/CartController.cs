@@ -1,5 +1,5 @@
-﻿using Carting.BLL.Models;
-using Carting.BLL.Services;
+﻿using Carting.BLL.Interfaces;
+using Carting.BLL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Carting.Controllers

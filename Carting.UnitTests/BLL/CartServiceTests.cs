@@ -5,7 +5,7 @@ using Xunit;
 using NSubstitute;
 using Carting.BLL.Models;
 using Carting.BLL.Services;
-using Carting.DAL;
+using Carting.BLL.Interfaces;
 
 public class CartServiceTests
 {

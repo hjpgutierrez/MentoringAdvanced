@@ -1,6 +1,4 @@
-﻿using Carting.BLL.Models;
-
-namespace Carting.DAL
+﻿namespace Carting.BLL.Interfaces
 {
     public interface IRepository<T> where T : EntityBase
     {

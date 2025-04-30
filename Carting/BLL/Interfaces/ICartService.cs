@@ -1,6 +1,6 @@
 ﻿using Carting.BLL.Models;
 
-namespace Carting.BLL.Services
+namespace Carting.BLL.Interfaces
 {
     public interface ICartService
     {
