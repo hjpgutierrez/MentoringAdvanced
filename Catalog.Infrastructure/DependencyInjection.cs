@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Ardalis.GuardClauses;
 
 namespace Catalog.Infrastructure
 {
@@ -14,7 +15,7 @@ namespace Catalog.Infrastructure
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            //Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
+            Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
 
             services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
 
@@ -26,29 +27,8 @@ namespace Catalog.Infrastructure
             });
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
-
-            //services.AddScoped<ApplicationDbContextInitialiser>();
-
-//#if (UseApiOnly)
-//        services.AddAuthentication()
-//            .AddBearerToken(IdentityConstants.BearerScheme);
-
-//        services.AddAuthorizationBuilder();
-
-//        services
-//            .AddIdentityCore<ApplicationUser>()
-//            .AddRoles<IdentityRole>()
-//            .AddEntityFrameworkStores<ApplicationDbContext>()
-//            .AddApiEndpoints();
-//#else
-//            services
-//                .AddDefaultIdentity<ApplicationUser>()
-//                .AddRoles<IdentityRole>()
-//                .AddEntityFrameworkStores<ApplicationDbContext>();
-//#endif
-
+            services.AddScoped<ApplicationDbContextInitialiser>();
             services.AddSingleton(TimeProvider.System);
-
 
             return services;
         }

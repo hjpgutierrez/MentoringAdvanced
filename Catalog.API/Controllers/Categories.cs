@@ -8,7 +8,7 @@ namespace Catalog.API.Controllers
     {
         public override void Map(WebApplication app)
         {
-            app.MapGroup(this)
+            app.MapGroup(this).WithOpenApi()
                 .MapGet(GetCategoriesWithPagination)
                 .MapGet(GetCategory, "{id}")
                 .MapPost(CreateCategory)

@@ -23,10 +23,7 @@ namespace Catalog.API
 
             services.AddEndpointsApiExplorer();
 
-            //services.AddOpenApiDocument((configure, sp) =>
-            //{
-            //    configure.Title = "CleanArchitecture API";
-            //});
+            services.AddOpenApiDocument();
 
             return services;
         }
