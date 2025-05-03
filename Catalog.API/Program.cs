@@ -1,12 +1,12 @@
-
 using Catalog.Infrastructure;
 using Catalog.Application;
+using Catalog.Infrastructure.Persistence;
 
 namespace Catalog.API
 {
-    public class Program
+    public partial class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -14,20 +14,25 @@ namespace Catalog.API
             builder.Services.AddApplicationServices();
             builder.Services.AddInfrastructureServices(builder.Configuration);
             builder.Services.AddWebServices();
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
             var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                await app.InitialiseDatabaseAsync();
+            }
+            else
+            {
+                // see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
             app.UseHealthChecks("/health");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseOpenApi();
+            app.UseSwaggerUi();
 
             app.MapControllerRoute(
                     name: "default",
