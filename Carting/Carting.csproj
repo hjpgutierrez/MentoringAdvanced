@@ -5,10 +5,12 @@
 	  <AssemblyName>Carting</AssemblyName>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup>    
     <PackageReference Include="FluentValidation" />
     <PackageReference Include="MongoDB.Driver" />
     <PackageReference Include="Swashbuckle.AspNetCore" />
+	<PackageReference Include="Asp.Versioning.Http" />
+	<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
   </ItemGroup>
 
 </Project>
