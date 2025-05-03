@@ -19,9 +19,9 @@ namespace Catalog.Infrastructure.Persistence.Configurations
                 ;
 
 
-            builder.HasMany(e => e.ChildProducts)
-                        .WithOne(e => e.Category)
-                        .HasForeignKey(e => e.CategoryId)
+            builder.HasMany(c => c.ChildProducts)
+                        .WithOne(p => p.Category)
+                        .HasForeignKey(p => p.CategoryId)
                         .IsRequired();
         }
     }

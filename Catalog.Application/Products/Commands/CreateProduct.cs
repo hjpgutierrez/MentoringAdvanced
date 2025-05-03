@@ -1,4 +1,5 @@
-﻿using Catalog.Application.Common.Interfaces;
+﻿using Catalog.Application.Categories.Queries;
+using Catalog.Application.Common.Interfaces;
 using Catalog.Domain.Entities;
 
 namespace Catalog.Application.Products.Commands
@@ -36,7 +37,7 @@ namespace Catalog.Application.Products.Commands
                 Description = request.Description,
                 Price = request.Price,
                 Amount = request.Amount,
-                CategoryId = request.CategoryId                
+                CategoryId = request.CategoryId
             };
 
             _context.Products.Add(entity);
@@ -49,18 +50,12 @@ namespace Catalog.Application.Products.Commands
 
     public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
     {
-        public CreateProductCommandValidator()
+        public CreateProductCommandValidator(ICategoryValidator _categoryValidator)
         {
-            RuleFor(v => v.Name)
-                .MaximumLength(50)
-                .NotEmpty();
-            RuleFor(v => v.CategoryId)
-                .GreaterThan(0);
-            RuleFor(v => v.Price)
-                .GreaterThanOrEqualTo(0);
-            RuleFor(v => v.Amount)
-                .GreaterThan(0);
-
+            RuleFor(v => v.Name).MaximumLength(50).NotEmpty();
+            RuleFor(v => v.Price).GreaterThanOrEqualTo(0);
+            RuleFor(v => v.Amount).GreaterThan(0);
+            RuleFor(v => v.CategoryId).MustAsync(_categoryValidator.BeValidCategoryId).WithMessage("CategoryId not found.");
         }
     }
 }

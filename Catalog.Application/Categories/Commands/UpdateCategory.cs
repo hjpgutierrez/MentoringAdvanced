@@ -1,4 +1,4 @@
-﻿using Ardalis.GuardClauses;
+﻿using Catalog.Application.Categories.Queries;
 using Catalog.Application.Common.Interfaces;
 
 namespace Catalog.Application.Categories.Commands
@@ -38,11 +38,14 @@ namespace Catalog.Application.Categories.Commands
 
     public class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCommand>
     {
-        public UpdateCategoryCommandValidator()
+        public UpdateCategoryCommandValidator(ICategoryValidator _categoryValidator)
         {
             RuleFor(v => v.Name)
                 .MaximumLength(50)
                 .NotEmpty();
+
+            RuleFor(x => x.ParentCategoryId)
+            .MustAsync(_categoryValidator.BeValidParentCategoryId).WithMessage("ParentCategoryId not found.");
         }
     }
 }
