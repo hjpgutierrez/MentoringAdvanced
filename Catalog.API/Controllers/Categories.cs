@@ -1,4 +1,5 @@
-﻿using Catalog.Application.Categories.Commands;
+﻿using Catalog.API.Helpers;
+using Catalog.Application.Categories.Commands;
 using Catalog.Application.Categories.Queries;
 using Catalog.Application.Models;
 
@@ -16,9 +17,14 @@ namespace Catalog.API.Controllers
                 .MapDelete(DeleteCategory, "{id}");
         }
 
-        public Task<PaginatedList<CategoryDto>> GetCategoriesWithPagination(ISender sender, [AsParameters] GetCategoriesWithPaginationQuery query)
+        public async Task<PaginatedList<CategoryDto>> GetCategoriesWithPagination(ISender sender, [AsParameters] GetCategoriesWithPaginationQuery query, HttpContext httpContext)
         {
-            return sender.Send(query);
+            var response = await sender.Send(query);
+            response.Items.ForEach(product =>
+            {
+                product.Href = UrlHelper.GetUrl(httpContext, product.Id.ToString());
+            });
+            return response;
         }
 
         public Task<CategoryDto> GetCategory(ISender sender, [AsParameters] GetCategoryQuery query)

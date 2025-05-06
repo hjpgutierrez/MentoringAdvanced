@@ -9,5 +9,7 @@
         public string Image { get; set; }
 
         public int? ParentCategoryId { get; set; }
+
+        public string Href { get; set; }
     }
 }
