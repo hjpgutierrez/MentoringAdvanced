@@ -9,7 +9,7 @@ namespace Catalog.API.Controllers
         public override void Map(WebApplication app)
         {
             app.MapGroup(this).WithOpenApi()
-                .MapGet(GetProductsWithPagination)
+                .MapGet(GetProductsByCategoryIdWithPagination)
                 .MapGet(GetProduct, "{id}")
                 .MapPost(CreateProduct)
                 .MapPut(UpdateProduct, "{id}")
@@ -17,7 +17,7 @@ namespace Catalog.API.Controllers
                 ;
         }
 
-        public Task<PaginatedList<ProductDto>> GetProductsWithPagination(ISender sender, [AsParameters] GetProductsWithPaginationQuery query)
+        public Task<PaginatedList<ProductDto>> GetProductsByCategoryIdWithPagination(ISender sender, [AsParameters] GetProductsByCategoryIdWithPaginationQuery query)
         {
             return sender.Send(query);
         }
