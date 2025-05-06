@@ -53,7 +53,7 @@ namespace Catalog.Application.Products.Commands
         public CreateProductCommandValidator(ICategoryValidator _categoryValidator)
         {
             RuleFor(v => v.Name).MaximumLength(50).NotEmpty();
-            RuleFor(v => v.Price).GreaterThanOrEqualTo(0);
+            RuleFor(v => v.Price).GreaterThan(0);
             RuleFor(v => v.Amount).GreaterThan(0);
             RuleFor(v => v.CategoryId).MustAsync(_categoryValidator.BeValidCategoryId).WithMessage("CategoryId not found.");
         }
