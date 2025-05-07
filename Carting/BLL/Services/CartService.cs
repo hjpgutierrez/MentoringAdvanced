@@ -25,6 +25,7 @@ namespace Carting.BLL.Services
             }
 
             Cart cart = _repository.GetDocumentById(cartId);
+            // If there was no cart for specified key – creates it.
             if (cart == null || string.IsNullOrEmpty(cart?.Id))
             {
                 cart = new Cart();

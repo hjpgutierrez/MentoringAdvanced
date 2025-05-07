@@ -1,5 +1,4 @@
-﻿using Ardalis.GuardClauses;
-using Catalog.Application.Common.Interfaces;
+﻿using Catalog.Application.Common.Interfaces;
 
 namespace Catalog.Application.Categories.Commands
 {
@@ -21,6 +20,8 @@ namespace Catalog.Application.Categories.Commands
             Guard.Against.NotFound(request.Id, entity);
 
             _context.Categories.Remove(entity);
+            var productToDelete = _context.Products.Where(p => p.CategoryId == request.Id);
+            _context.Products.RemoveRange(productToDelete);
 
             await _context.SaveChangesAsync(cancellationToken);
         }

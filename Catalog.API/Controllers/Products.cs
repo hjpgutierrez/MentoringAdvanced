@@ -1,6 +1,7 @@
 ﻿using Catalog.Application.Products.Queries;
 using Catalog.Application.Models;
 using Catalog.Application.Products.Commands;
+using Catalog.API.Helpers;
 
 namespace Catalog.API.Controllers
 {
@@ -9,7 +10,7 @@ namespace Catalog.API.Controllers
         public override void Map(WebApplication app)
         {
             app.MapGroup(this).WithOpenApi()
-                .MapGet(GetProductsWithPagination)
+                .MapGet(GetProductsByCategoryIdWithPagination)
                 .MapGet(GetProduct, "{id}")
                 .MapPost(CreateProduct)
                 .MapPut(UpdateProduct, "{id}")
@@ -17,9 +18,14 @@ namespace Catalog.API.Controllers
                 ;
         }
 
-        public Task<PaginatedList<ProductDto>> GetProductsWithPagination(ISender sender, [AsParameters] GetProductsWithPaginationQuery query)
+        public async Task<PaginatedList<ProductDto>> GetProductsByCategoryIdWithPagination(ISender sender, [AsParameters] GetProductsByCategoryIdWithPaginationQuery query, HttpContext httpContext)
         {
-            return sender.Send(query);
+            var response = await sender.Send(query);
+            response.Items.ForEach(product =>
+            {
+                product.Href = UrlHelper.GetUrl(httpContext, product.Id.ToString());
+            });
+            return response;
         }
 
         public Task<ProductDto> GetProduct(ISender sender, [AsParameters] GetProductQuery query)
