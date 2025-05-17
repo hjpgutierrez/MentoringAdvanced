@@ -1,4 +1,5 @@
-﻿using Catalog.Application.Common.Interfaces;
+﻿using Catalog.Application.Categories.Queries;
+using Catalog.Application.Common.Interfaces;
 using Catalog.Domain.Entities;
 
 namespace Catalog.Application.Categories.Commands
@@ -22,7 +23,7 @@ namespace Catalog.Application.Categories.Commands
         }
 
         public async Task<int> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
-        {
+        {            
             var entity = new Category
             {
                 Image = request.Image,
@@ -40,11 +41,14 @@ namespace Catalog.Application.Categories.Commands
 
     public class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCommand>
     {
-        public CreateCategoryCommandValidator()
+        public CreateCategoryCommandValidator(ICategoryValidator _categoryValidator)
         {
             RuleFor(v => v.Name)
                 .MaximumLength(50)
                 .NotEmpty();
+
+            RuleFor(x => x.ParentCategoryId)
+            .MustAsync(_categoryValidator.BeValidParentCategoryId).WithMessage("ParentCategoryId not found.");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Catalog.Application.Common.Behaviours;
+﻿using Catalog.Application.Categories.Queries;
+using Catalog.Application.Common.Behaviours;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -8,6 +9,8 @@ namespace Catalog.Application
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<ICategoryValidator, CategoryValidator>();
+
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

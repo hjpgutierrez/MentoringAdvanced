@@ -1,10 +1,12 @@
-﻿using Carting.BLL.Interfaces;
+﻿using Carting.BLL.DTOs;
+using Carting.BLL.Interfaces;
 using Carting.BLL.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Carting.Controllers
+namespace Carting.Controllers.V2
 {
     [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class CartController : ControllerBase
     {
@@ -21,15 +23,11 @@ namespace Carting.Controllers
         {
             Cart cart = _cartService.GetCart(id);
             if (cart == null || string.IsNullOrEmpty(cart?.Id))
-            { 
+            {
                 return NotFound();
             }
 
-            var dto = new
-            {
-                code = cart?.Code,
-                items = cart?.Items,
-            };
+            var dto = new CartReponseDtoV2(cart.Items);
             return Ok(dto);
         }
 
