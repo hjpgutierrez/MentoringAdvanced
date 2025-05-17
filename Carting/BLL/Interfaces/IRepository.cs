@@ -9,5 +9,7 @@
         bool DeleteDocument(string id);
 
         T GetDocumentById(string id);
+
+        IList<T> GetDocumentsByItemId(string itemId);
     }
 }

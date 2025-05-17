@@ -9,5 +9,9 @@ namespace Carting.BLL.Interfaces
         bool AddItem(string cartId, Item item);
 
         bool RemoveItem(string cartId, int itemId);
+
+        IList<Cart> GetDocumentsByItemId(int itemId);
+
+        bool UpdateDocument(Cart item);
     }
 }

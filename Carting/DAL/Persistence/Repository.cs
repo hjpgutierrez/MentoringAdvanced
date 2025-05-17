@@ -1,8 +1,9 @@
 ﻿using Carting.BLL.Interfaces;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Carting.DAL
+namespace Carting.DAL.Persistence
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
     {
@@ -40,6 +41,13 @@ namespace Carting.DAL
         {
             _collection.DeleteOne(x => x.Code == code);
             return true;
-        }  
+        }
+
+        public IList<TEntity> GetDocumentsByItemId(string itemId)
+        {
+            var filter = Builders<TEntity>.Filter.ElemMatch("Items", Builders<BsonValue>.Filter.Eq("_id", itemId));
+            var documents = _collection.Find(filter).ToList();
+            return documents;
+        }
     }
 }
