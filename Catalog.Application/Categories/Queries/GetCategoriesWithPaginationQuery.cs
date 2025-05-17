@@ -29,4 +29,13 @@ namespace Catalog.Application.Categories.Queries
                 .PaginatedListAsync(request.PageNumber, request.PageSize);
         }
     }
+
+    public class GetCategoriesWithPaginationQueryValidator : AbstractValidator<GetCategoriesWithPaginationQuery>
+    {
+        public GetCategoriesWithPaginationQueryValidator()
+        {
+            RuleFor(v => v.PageSize).GreaterThan(0);
+            RuleFor(v => v.PageNumber).GreaterThan(0);
+        }
+    }
 }
