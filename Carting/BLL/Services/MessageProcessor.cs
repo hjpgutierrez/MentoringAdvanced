@@ -1,6 +1,5 @@
 ﻿using Carting.BLL.DTOs;
 using Carting.BLL.Interfaces;
-using Carting.BLL.Models;
 using System.Text.Json;
 
 namespace Carting.BLL.Services
@@ -20,7 +19,8 @@ namespace Carting.BLL.Services
         {
             _logger.LogInformation($"Processing message: {message}");
 
-            var productEvent = JsonSerializer.Deserialize<ProductChangedEvent>(message);
+            var rootProductEvent = JsonSerializer.Deserialize<ProductChangedEvent>(message);
+            var productEvent = rootProductEvent!.Product;
 
             var carts = _cartService.GetDocumentsByItemId(productEvent!.Id);
 

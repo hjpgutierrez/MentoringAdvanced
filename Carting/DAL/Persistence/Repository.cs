@@ -1,23 +1,28 @@
 ﻿using Carting.BLL.Interfaces;
+using Carting.BLL.Models;
 using Microsoft.Extensions.Options;
-using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Carting.DAL.Persistence
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : EntityBase
     {
-        private readonly IMongoCollection<TEntity> _collection;
+        private readonly IMongoDatabase _database;
+        private IMongoCollection<TEntity> _collection;
+        private IMongoCollection<Cart> _newCollection;
 
-        public Repository(IOptions<DatabaseSettings> databaseSettings)
+        public ILogger<Repository<TEntity>> _logger { get; }
+
+        public Repository(IOptions<DatabaseSettings> databaseSettings, ILogger<Repository<TEntity>> logger)
         {
             var mongoClient = new MongoClient(
             databaseSettings.Value.ConnectionString);
 
-            var mongoDatabase = mongoClient.GetDatabase(
+            _database = mongoClient.GetDatabase(
                 databaseSettings.Value.DatabaseName);
 
-            _collection = mongoDatabase.GetCollection<TEntity>(databaseSettings.Value.CollectionName);
+            _collection = _database.GetCollection<TEntity>(databaseSettings.Value.CollectionName);
+            _logger = logger;
         }
 
         public bool InsertDocument(TEntity item)
@@ -43,11 +48,22 @@ namespace Carting.DAL.Persistence
             return true;
         }
 
-        public IList<TEntity> GetDocumentsByItemId(string itemId)
+        public IList<Cart> GetDocumentsByItemId(string itemId)
         {
-            var filter = Builders<TEntity>.Filter.ElemMatch("Items", Builders<BsonValue>.Filter.Eq("_id", itemId));
-            var documents = _collection.Find(filter).ToList();
-            return documents;
+            try
+            {
+                var filter = Builders<Cart>.Filter.ElemMatch<Item>(
+                    x => x.Items,
+                    item => item.Id == int.Parse(itemId)
+                );
+                _newCollection = _database.GetCollection<Cart>("Cart");
+                var documents = _newCollection.Find(filter).ToList();
+                return documents;
+            }
+            catch (Exception ex) {
+                _logger.LogError(ex, ex.Message);
+                return Array.Empty<Cart>();
+            }            
         }
     }
 }

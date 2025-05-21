@@ -17,8 +17,9 @@ namespace Catalog.Infrastructure.MessageBrokers
 
         public async Task PublishAsync<T>(T message, string routingKey)
         {
+            
             var factory = new ConnectionFactory { HostName = "localhost" };
-            var connection = await factory.CreateConnectionAsync();
+            using var connection = await factory.CreateConnectionAsync();
             using var channel = await connection.CreateChannelAsync();
             await channel.QueueDeclareAsync(queue: routingKey, durable: false, exclusive: false, autoDelete: false, arguments: null);
 

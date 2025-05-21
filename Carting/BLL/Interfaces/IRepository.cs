@@ -1,4 +1,6 @@
-﻿namespace Carting.BLL.Interfaces
+﻿using Carting.BLL.Models;
+
+namespace Carting.BLL.Interfaces
 {
     public interface IRepository<T> where T : EntityBase
     {
@@ -10,6 +12,6 @@
 
         T GetDocumentById(string id);
 
-        IList<T> GetDocumentsByItemId(string itemId);
+        IList<Cart> GetDocumentsByItemId(string itemId);
     }
 }

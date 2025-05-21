@@ -1,4 +1,5 @@
-﻿using CleanArchitecture.Domain.Common;
+﻿using Catalog.Domain.Common;
+using CleanArchitecture.Domain.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -40,6 +41,7 @@ public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
 
         var domainEvents = entities
             .SelectMany(e => e.DomainEvents)
+            .Distinct(new DomainEventEqualityComparer())
             .ToList();
 
         entities.ToList().ForEach(e => e.ClearDomainEvents());

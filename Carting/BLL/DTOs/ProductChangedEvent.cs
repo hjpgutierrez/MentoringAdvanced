@@ -1,6 +1,6 @@
 ﻿namespace Carting.BLL.DTOs
 {
-    public class ProductChangedEvent
+    public class ProductDetailsChangedEvent
     {
         public int Id { get; set; }
 
@@ -9,5 +9,10 @@
         public string Image { get; set; } = null!;
 
         public decimal Price { get; set; }
+    }
+
+    public class ProductChangedEvent
+    {
+        public required ProductDetailsChangedEvent Product { get; set; }
     }
 }
