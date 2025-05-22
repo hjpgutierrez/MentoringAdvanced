@@ -1,4 +1,4 @@
-﻿namespace Carting.DAL
+﻿namespace Carting.DAL.Persistence
 {
     public class DatabaseSettings
     {

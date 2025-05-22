@@ -8,6 +8,7 @@
   <ItemGroup>    
     <PackageReference Include="FluentValidation" />
     <PackageReference Include="MongoDB.Driver" />
+    <PackageReference Include="RabbitMQ.Client" />
     <PackageReference Include="Swashbuckle.AspNetCore" />
 	<PackageReference Include="Asp.Versioning.Http" />
 	<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />

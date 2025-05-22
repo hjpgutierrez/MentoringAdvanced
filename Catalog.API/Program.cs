@@ -1,6 +1,7 @@
 using Catalog.Infrastructure;
 using Catalog.Application;
 using Catalog.Infrastructure.Persistence;
+using FluentValidation;
 
 namespace Catalog.API
 {
@@ -8,6 +9,9 @@ namespace Catalog.API
     {
         public static async Task Main(string[] args)
         {
+            // Set FluentValidation to use English culture globally
+            ValidatorOptions.Global.LanguageManager.Culture = new System.Globalization.CultureInfo("en");
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.

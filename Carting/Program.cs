@@ -1,11 +1,11 @@
-
 using Carting.BLL.Interfaces;
 using Carting.BLL.Services;
-using Carting.DAL;
 using Asp.Versioning;
 using Asp.Versioning.Conventions;
 using Carting.Configuration;
 using Asp.Versioning.ApiExplorer;
+using Carting.DAL.Persistence;
+using Carting.DAL.MessageBrokers;
 
 namespace Carting
 {
@@ -52,6 +52,9 @@ namespace Carting
 
             builder.Services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddTransient<ICartService, CartService>();
+
+            builder.Services.AddSingleton<IMessageProcessor, MessageProcessor>();
+            builder.Services.AddHostedService<RabbitMqMessageConsumer>();
 
             var app = builder.Build();
             var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();

@@ -1,4 +1,5 @@
-﻿using Catalog.Application.Common.Interfaces;
+﻿using Catalog.Application.Categories.Queries;
+using Catalog.Application.Common.Interfaces;
 using Catalog.Application.Models;
 using Catalog.Domain.Common;
 
@@ -11,12 +12,12 @@ namespace Catalog.Application.Products.Queries
         public int CategoryId { get; set; }
     }
 
-    public class GetTodoItemsWithPaginationQueryHandler : IRequestHandler<GetProductsByCategoryIdWithPaginationQuery, PaginatedList<ProductDto>>
+    public class GetProductsByCategoryIdWithPaginationQueryHandler : IRequestHandler<GetProductsByCategoryIdWithPaginationQuery, PaginatedList<ProductDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetTodoItemsWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper)
+        public GetProductsByCategoryIdWithPaginationQueryHandler(IApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -29,6 +30,17 @@ namespace Catalog.Application.Products.Queries
                 .OrderBy(x => x.Name)
                 .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
                 .PaginatedListAsync(request.PageNumber, request.PageSize);
+        }
+    }
+
+    public class GetProductsByCategoryIdWithPaginationQueryValidator : AbstractValidator<GetProductsByCategoryIdWithPaginationQuery>
+    {
+        public GetProductsByCategoryIdWithPaginationQueryValidator(ICategoryValidator _categoryValidator)
+        {
+            RuleFor(v => v.PageSize).GreaterThan(0);
+            RuleFor(v => v.PageNumber).GreaterThan(0);
+            RuleFor(v => v.CategoryId)
+            .MustAsync(_categoryValidator.BeValidCategoryId).WithMessage("CategoryId not found.");
         }
     }
 }
