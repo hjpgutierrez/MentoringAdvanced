@@ -15,5 +15,7 @@
         public int Amount { get; set; }
 
         public decimal Price { get; set; }
+
+        public string Href { get; set; }
     }
 }

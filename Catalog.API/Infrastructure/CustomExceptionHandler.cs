@@ -15,6 +15,7 @@ namespace Catalog.API.Infrastructure
             _exceptionHandlers = new()
             {
                 { typeof(ValidationException), HandleValidationException },
+                { typeof(BadHttpRequestException), HandleBadHttpRequestException },
                 { typeof(NotFoundException), HandleNotFoundException },
                 { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
                 { typeof(ForbiddenAccessException), HandleForbiddenAccessException },
@@ -44,6 +45,17 @@ namespace Catalog.API.Infrastructure
             {
                 Status = StatusCodes.Status400BadRequest,
                 Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+            });
+        }
+
+        private async Task HandleBadHttpRequestException(HttpContext httpContext, Exception ex)
+        {
+            httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+            await httpContext.Response.WriteAsJsonAsync(new ProblemDetails()
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1",
+                Detail = ex.Message
             });
         }
 
