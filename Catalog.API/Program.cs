@@ -1,7 +1,8 @@
-using Catalog.Infrastructure;
 using Catalog.Application;
+using Catalog.Infrastructure;
 using Catalog.Infrastructure.Persistence;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Catalog.API
 {
@@ -19,6 +20,22 @@ namespace Catalog.API
             builder.Services.AddInfrastructureServices(builder.Configuration);
             builder.Services.AddWebServices();
             builder.Services.AddControllers();
+
+            // Configure Authentication with JWT Bearer
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = $"https://{builder.Configuration["Auth0:Domain"]}/";
+                    options.Audience = builder.Configuration["Auth0:Audience"];
+                });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                // Define policies based on roles or permissions
+                options.AddPolicy("ManagerPolicy", policy => policy.RequireClaim("permissions", "read:catalog", "create:catalog", "update:catalog", "delete:catalog"));
+                options.AddPolicy("CustomerPolicy", policy => policy.RequireClaim("permissions", "read:catalog"));
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -46,6 +63,10 @@ namespace Catalog.API
 
 
             app.Map("/", () => Results.Redirect("/api"));
+
+            // Enable authentication and authorization middleware
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapEndpoints();
 
