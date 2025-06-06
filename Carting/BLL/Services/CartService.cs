@@ -52,6 +52,16 @@ namespace Carting.BLL.Services
             return _repository.GetDocumentById(cartId);
         }
 
+        public IList<Cart> GetDocumentsByItemId(int itemId)
+        {
+            if (itemId < 0)
+            {
+                throw new ArgumentException("Must be greater than 0", nameof(itemId));
+            }
+
+            return _repository.GetDocumentsByItemId(itemId.ToString());
+        }
+
         public bool RemoveItem(string cartId, int itemId)
         {
             if (string.IsNullOrWhiteSpace(cartId))
@@ -81,6 +91,11 @@ namespace Carting.BLL.Services
             }
 
             return _repository.UpdateDocument(cart);
+        }
+
+        public bool UpdateDocument(Cart item)
+        {
+            return _repository.UpdateDocument(item);
         }
     }
 }

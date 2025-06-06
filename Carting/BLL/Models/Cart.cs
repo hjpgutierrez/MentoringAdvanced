@@ -11,13 +11,14 @@ namespace Carting.BLL.Models
 
         public IList<Item> Items;
 
-        public Cart() {
+        public Cart()
+        {
             Items = new List<Item>();
         }
 
-        public IList<Item> GetItems() => Items; 
+        public IList<Item> GetItems() => Items;
 
-        public Item GetItem(int itemId) => Items.First(i => i.Id == itemId); 
+        public Item GetItem(int itemId) => Items.First(i => i.Id == itemId);
 
         public bool AddItem(Item item)
         {
