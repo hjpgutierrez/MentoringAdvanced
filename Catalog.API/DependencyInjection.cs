@@ -1,4 +1,6 @@
-﻿using Catalog.Infrastructure.Persistence;
+﻿using Catalog.API.Helpers;
+using Catalog.Application.Common.Interfaces;
+using Catalog.Infrastructure.Persistence;
 
 namespace Catalog.API
 {
@@ -8,14 +10,14 @@ namespace Catalog.API
         {
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddHttpContextAccessor();
+            services.AddScoped<IUser, CurrentUser>();
+
+            services.AddHttpContextAccessor();            
 
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
 
             services.AddExceptionHandler<CustomExceptionHandler>();
-
-            //services.AddRazorPages();
 
             // Customise default API behaviour
             //services.Configure<ApiBehaviorOptions>(options =>
@@ -23,7 +25,10 @@ namespace Catalog.API
 
             services.AddEndpointsApiExplorer();
 
-            services.AddOpenApiDocument();
+            services.AddOpenApiDocument((configure, sp) =>
+            {
+                configure.Title = "Catalog API";
+            });
 
             return services;
         }

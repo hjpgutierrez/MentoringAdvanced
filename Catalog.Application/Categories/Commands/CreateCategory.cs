@@ -1,9 +1,12 @@
 ﻿using Catalog.Application.Categories.Queries;
 using Catalog.Application.Common.Interfaces;
+using Catalog.Application.Common.Security;
 using Catalog.Domain.Entities;
 
 namespace Catalog.Application.Categories.Commands
 {
+    [Authorize(Roles = "Manager")]
+    [Authorize(Permission = "create:catalog")]
     public class CreateCategoryCommand : IRequest<int>
     {
         public string Name { get; set; }

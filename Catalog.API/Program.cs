@@ -29,12 +29,6 @@ namespace Catalog.API
                     options.Audience = builder.Configuration["Auth0:Audience"];
                 });
 
-            builder.Services.AddAuthorization(options =>
-            {
-                // Define policies based on roles or permissions
-                options.AddPolicy("ManagerPolicy", policy => policy.RequireClaim("permissions", "read:catalog", "create:catalog", "update:catalog", "delete:catalog"));
-                options.AddPolicy("CustomerPolicy", policy => policy.RequireClaim("permissions", "read:catalog"));
-            });
 
             var app = builder.Build();
 
@@ -64,9 +58,8 @@ namespace Catalog.API
 
             app.Map("/", () => Results.Redirect("/api"));
 
-            // Enable authentication and authorization middleware
+            // Enable authentication middleware
             app.UseAuthentication();
-            app.UseAuthorization();
 
             app.MapEndpoints();
 
