@@ -1,7 +1,6 @@
 ﻿using Catalog.API.Helpers;
 using Catalog.Application.Categories.Commands;
 using Catalog.Application.Categories.Queries;
-using Catalog.Application.Common.Exceptions;
 using Catalog.Application.Models;
 
 namespace Catalog.API.Controllers
@@ -20,22 +19,6 @@ namespace Catalog.API.Controllers
 
         public async Task<PaginatedList<CategoryDto>> GetCategoriesWithPagination(ISender sender, [AsParameters] GetCategoriesWithPaginationQuery query, HttpContext httpContext)
         {
-            if (!httpContext.User.Identity.IsAuthenticated)
-            {
-                throw new UnauthorizedAccessException();
-            }
-
-            var claims = httpContext.User.Claims.Select(c => new { c.Type, c.Value });
-
-            var permissions = httpContext.User.Claims
-            .Where(c => c.Type == "permissions")
-            .Select(c => c.Value);
-
-            if (!permissions.Contains("read:catalog"))
-            {
-                throw new ForbiddenAccessException();
-            }
-
             var response = await sender.Send(query);
             response.Items.ForEach(product =>
             {

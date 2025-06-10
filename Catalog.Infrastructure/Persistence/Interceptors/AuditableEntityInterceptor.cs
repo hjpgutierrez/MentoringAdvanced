@@ -1,15 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore;
+﻿using Catalog.Application.Common.Interfaces;
 using Catalog.Domain.Common;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Catalog.Infrastructure.Persistence.Interceptors
 {
     public class AuditableEntityInterceptor : SaveChangesInterceptor
     {
+        private readonly IUser _user;
 
-        public AuditableEntityInterceptor()
+        public AuditableEntityInterceptor(IUser user)
         {
+            _user = user;
         }
 
         public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
@@ -37,10 +40,11 @@ namespace Catalog.Infrastructure.Persistence.Interceptors
                     var utcNow = DateTime.UtcNow;
                     if (entry.State == EntityState.Added)
                     {
-                        entry.Entity.CreatedBy = "CreateUserId";
+                        entry.Entity.CreatedBy = _user.Id;
                         entry.Entity.Created = utcNow;
                     }
-                    entry.Entity.LastModifiedBy = "UpdateUserId";
+
+                    entry.Entity.LastModifiedBy = _user.Id;
                     entry.Entity.LastModified = utcNow;
                 }
             }

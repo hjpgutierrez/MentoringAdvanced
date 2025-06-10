@@ -5,8 +5,7 @@ using Catalog.Domain.Entities;
 
 namespace Catalog.Application.Categories.Commands
 {
-    [Authorize(Roles = "Manager")]
-    [Authorize(Permission = "create:catalog")]
+    [Authorize(Roles = "Manager")]    
     public class CreateCategoryCommand : IRequest<int>
     {
         public string Name { get; set; }
