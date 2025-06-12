@@ -1,11 +1,14 @@
+using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
+using Asp.Versioning.Conventions;
 using Carting.BLL.Interfaces;
 using Carting.BLL.Services;
-using Asp.Versioning;
-using Asp.Versioning.Conventions;
 using Carting.Configuration;
-using Asp.Versioning.ApiExplorer;
-using Carting.DAL.Persistence;
 using Carting.DAL.MessageBrokers;
+using Carting.DAL.Persistence;
+using Carting.Security;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Carting
 {
@@ -14,6 +17,21 @@ namespace Carting
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            string domain = $"https://{builder.Configuration["Auth0:Domain"]}/";
+            // Configure Authentication with JWT Bearer
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {                    
+                    options.Authority = domain;
+                    options.Audience = builder.Configuration["Auth0:Audience"];
+                });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("all:carting", policy => policy.Requirements.Add(new
+                HasScopeRequirement("all:carting", domain)));
+            });
+            builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
             // Add services to the container.
             builder.Services.Configure<DatabaseSettings>(
@@ -74,6 +92,7 @@ namespace Carting
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

@@ -164,7 +164,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJTdG9yZUN1c3RvbWVyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2U0MTY2MTc4NTY1ZTQzOTk4ZmEwMiIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5NTU5NDgwLCJleHAiOjE3NDk2NDU4ODAsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJyZWFkOmNhdGFsb2ciXX0.mOfN-oQH6yMK-PoW5jFqRRlIU9QEQAWixZ-LEG1e68Cbj0GNc_IWoHL1DGq6iISh80nwxNHUC-ccmEYrPzThOAYABw__2nB2i0Jtt0uKHbv5k0-YPtbX2bjbdYo7unzVrDyXstKMeY_V1q8BpvgoSaKQXBXAOZFLntuZ8yht7Fv51zvSSLGclweC6x4YWL8-SjL8heATWwK0QYr0_kbBYca1Q9kKHaZ_aQIf7RG0k2ZdTLJfvQ08HttHwUWNizWTm-z1bl05UqZxOWDyfd-LPRJLc-AEkNBZdm7mJSQCsLuH9nv7qMwuyYn66cnn8hqLq9C6yjieypOPDao5YxrZjA",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJTdG9yZUN1c3RvbWVyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2U0MTY2MTc4NTY1ZTQzOTk4ZmEwMiIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5Njk2MzIyLCJleHAiOjE3NDk3ODI3MjIsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJhbGw6Y2FydGluZyIsInJlYWQ6Y2F0YWxvZyJdfQ.kTfyxF051h-rP42Juu0NNK2fA8vRipLvoSV9XdlwsBqp0Iigfl_aakCRxkBnoijGxUfOjbUifcajKg2-6ypNh5Ys8w7mmjPYK-t4E0MO9vXatC-PD93q3BW6N_edKWfSUYiJkVlPFIoN44Y63AK0Uf8rzxc5ILq_9wlKOMHVTyt7uUkMtl4vXbc-iR3gl7TeLcEcIGURNhdx-ux2Fn2564hHKsHuukD22bUGnq_56dpcojYh6vLPNxnGl2qU4UDsZDTc4aGeJvLTz-2PwQkHyxDtpWqlX99HSGXfce-ATTmQ3uIG-Z7jSGrCqgHHs5MoofCEObhKT8_VTcJRRxz6BA",
 								"type": "text"
 							}
 						],
@@ -316,19 +316,18 @@
 			"name": "Carting",
 			"item": [
 				{
-					"name": "GetCart",
+					"name": "GetCart V2",
 					"request": {
 						"method": "GET",
 						"header": [
 							{
-								"key": "X-Version",
-								"value": "1",
-								"type": "text",
-								"disabled": true
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJNYW5hZ2VyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2UzNmY3NTdhZmMxMGU4M2QzZTc2ZSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5Njk1OTMxLCJleHAiOjE3NDk3ODIzMzEsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJhbGw6Y2FydGluZyIsImNyZWF0ZTpjYXRhbG9nIiwiZGVsZXRlOmNhdGFsb2ciLCJyZWFkOmNhdGFsb2ciLCJ1cGRhdGU6Y2F0YWxvZyJdfQ.VmjJQKHJvbjVSyAGHigCZlvMB8AmPHaQHPjGuVSUgfTkFvZFHJq9wRuuJif4FjxH-hXkbD2kG_IlaJqtTvThyxSwu3KefgI9ThYAWa7s3FG9mfUbQZszqn2B_5Zf6pASUcJQbmH6TtbVMOxp33Xv-aAD0GxxTJ9ja8nMm7vCJowZnDYTmRenQbBC86641v6x7C2XSTT-0zIeWvX5-rIHq_9YzrfhivcrKolrTPxMBES5r-hiiG3rtZczLlFst1In7PW-Bwhq2JqiDyagts7tMuhmnzDBz8RDxd5O1q8HoXvPBg2uZAMqnpag4jat71gwHM3Fi09oKLlONMhuyWLM5Q",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "https://localhost:7235/api/v2/cart/tatata",
+							"raw": "https://localhost:7235/api/v2/cart/colmedica",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -338,7 +337,7 @@
 								"api",
 								"v2",
 								"cart",
-								"tatata"
+								"colmedica"
 							],
 							"query": [
 								{
@@ -346,6 +345,105 @@
 									"value": "2",
 									"disabled": true
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCart V1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJNYW5hZ2VyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2UzNmY3NTdhZmMxMGU4M2QzZTc2ZSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5Njk1OTMxLCJleHAiOjE3NDk3ODIzMzEsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJhbGw6Y2FydGluZyIsImNyZWF0ZTpjYXRhbG9nIiwiZGVsZXRlOmNhdGFsb2ciLCJyZWFkOmNhdGFsb2ciLCJ1cGRhdGU6Y2F0YWxvZyJdfQ.VmjJQKHJvbjVSyAGHigCZlvMB8AmPHaQHPjGuVSUgfTkFvZFHJq9wRuuJif4FjxH-hXkbD2kG_IlaJqtTvThyxSwu3KefgI9ThYAWa7s3FG9mfUbQZszqn2B_5Zf6pASUcJQbmH6TtbVMOxp33Xv-aAD0GxxTJ9ja8nMm7vCJowZnDYTmRenQbBC86641v6x7C2XSTT-0zIeWvX5-rIHq_9YzrfhivcrKolrTPxMBES5r-hiiG3rtZczLlFst1In7PW-Bwhq2JqiDyagts7tMuhmnzDBz8RDxd5O1q8HoXvPBg2uZAMqnpag4jat71gwHM3Fi09oKLlONMhuyWLM5Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7235/api/Cart/exito",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7235",
+							"path": [
+								"api",
+								"Cart",
+								"exito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJTdG9yZUN1c3RvbWVyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2U0MTY2MTc4NTY1ZTQzOTk4ZmEwMiIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5Njk2MzIyLCJleHAiOjE3NDk3ODI3MjIsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJhbGw6Y2FydGluZyIsInJlYWQ6Y2F0YWxvZyJdfQ.kTfyxF051h-rP42Juu0NNK2fA8vRipLvoSV9XdlwsBqp0Iigfl_aakCRxkBnoijGxUfOjbUifcajKg2-6ypNh5Ys8w7mmjPYK-t4E0MO9vXatC-PD93q3BW6N_edKWfSUYiJkVlPFIoN44Y63AK0Uf8rzxc5ILq_9wlKOMHVTyt7uUkMtl4vXbc-iR3gl7TeLcEcIGURNhdx-ux2Fn2564hHKsHuukD22bUGnq_56dpcojYh6vLPNxnGl2qU4UDsZDTc4aGeJvLTz-2PwQkHyxDtpWqlX99HSGXfce-ATTmQ3uIG-Z7jSGrCqgHHs5MoofCEObhKT8_VTcJRRxz6BA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2,\r\n  \"name\": \"Pera\",\r\n  \"image\": \"\",\r\n  \"price\": 20,\r\n  \"quantity\": 15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7235/api/Cart/colmedica",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7235",
+							"path": [
+								"api",
+								"Cart",
+								"colmedica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cart",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJTdG9yZUN1c3RvbWVyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2U0MTY2MTc4NTY1ZTQzOTk4ZmEwMiIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5Njk2MzIyLCJleHAiOjE3NDk3ODI3MjIsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJhbGw6Y2FydGluZyIsInJlYWQ6Y2F0YWxvZyJdfQ.kTfyxF051h-rP42Juu0NNK2fA8vRipLvoSV9XdlwsBqp0Iigfl_aakCRxkBnoijGxUfOjbUifcajKg2-6ypNh5Ys8w7mmjPYK-t4E0MO9vXatC-PD93q3BW6N_edKWfSUYiJkVlPFIoN44Y63AK0Uf8rzxc5ILq_9wlKOMHVTyt7uUkMtl4vXbc-iR3gl7TeLcEcIGURNhdx-ux2Fn2564hHKsHuukD22bUGnq_56dpcojYh6vLPNxnGl2qU4UDsZDTc4aGeJvLTz-2PwQkHyxDtpWqlX99HSGXfce-ATTmQ3uIG-Z7jSGrCqgHHs5MoofCEObhKT8_VTcJRRxz6BA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "1",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7235/api/Cart/exito",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7235",
+							"path": [
+								"api",
+								"Cart",
+								"exito"
 							]
 						}
 					},
