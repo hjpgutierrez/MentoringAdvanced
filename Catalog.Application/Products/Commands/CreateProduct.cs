@@ -1,9 +1,11 @@
 ﻿using Catalog.Application.Categories.Queries;
 using Catalog.Application.Common.Interfaces;
+using Catalog.Application.Common.Security;
 using Catalog.Domain.Entities;
 
 namespace Catalog.Application.Products.Commands
 {
+    [Authorize(Roles = "Manager")]
     public class CreateProductCommand : IRequest<int>
     {
         public string Name { get; set; }

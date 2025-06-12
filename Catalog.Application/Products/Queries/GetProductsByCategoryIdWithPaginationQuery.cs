@@ -1,10 +1,12 @@
 ﻿using Catalog.Application.Categories.Queries;
 using Catalog.Application.Common.Interfaces;
+using Catalog.Application.Common.Security;
 using Catalog.Application.Models;
 using Catalog.Domain.Common;
 
 namespace Catalog.Application.Products.Queries
 {
+    [Authorize(Permission = "read:catalog")]
     public class GetProductsByCategoryIdWithPaginationQuery : IRequest<PaginatedList<ProductDto>>
     {
         public int PageNumber { get; init; } = 1;

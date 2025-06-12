@@ -1,8 +1,10 @@
 ﻿using Catalog.Application.Categories.Queries;
 using Catalog.Application.Common.Interfaces;
+using Catalog.Application.Common.Security;
 
 namespace Catalog.Application.Categories.Commands
 {
+    [Authorize(Roles = "Manager")]
     public class UpdateCategoryCommand : IRequest
     {
         public int Id { get; init; }

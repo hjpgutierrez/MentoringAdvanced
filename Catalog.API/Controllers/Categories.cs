@@ -24,6 +24,7 @@ namespace Catalog.API.Controllers
             {
                 product.Href = UrlHelper.GetUrl(httpContext, product.Id.ToString());
             });
+
             return response;
         }
 

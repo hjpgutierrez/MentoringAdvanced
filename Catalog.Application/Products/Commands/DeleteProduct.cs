@@ -1,8 +1,9 @@
-﻿using Ardalis.GuardClauses;
-using Catalog.Application.Common.Interfaces;
+﻿using Catalog.Application.Common.Interfaces;
+using Catalog.Application.Common.Security;
 
 namespace Catalog.Application.Products.Commands
 {
+    [Authorize(Roles = "Manager")]
     public record DeleteProductCommand(int Id) : IRequest;
 
     public class DeleteProductsCommandHandler : IRequestHandler<DeleteProductCommand>

@@ -13,9 +13,15 @@
 					"name": "List",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJTdG9yZUN1c3RvbWVyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2U0MTY2MTc4NTY1ZTQzOTk4ZmEwMiIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5NTU5NDgwLCJleHAiOjE3NDk2NDU4ODAsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJyZWFkOmNhdGFsb2ciXX0.mOfN-oQH6yMK-PoW5jFqRRlIU9QEQAWixZ-LEG1e68Cbj0GNc_IWoHL1DGq6iISh80nwxNHUC-ccmEYrPzThOAYABw__2nB2i0Jtt0uKHbv5k0-YPtbX2bjbdYo7unzVrDyXstKMeY_V1q8BpvgoSaKQXBXAOZFLntuZ8yht7Fv51zvSSLGclweC6x4YWL8-SjL8heATWwK0QYr0_kbBYca1Q9kKHaZ_aQIf7RG0k2ZdTLJfvQ08HttHwUWNizWTm-z1bl05UqZxOWDyfd-LPRJLc-AEkNBZdm7mJSQCsLuH9nv7qMwuyYn66cnn8hqLq9C6yjieypOPDao5YxrZjA",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "https://localhost:7167/api/categories?PageNumber=1&PageSize=10",
+							"raw": "https://localhost:7167/api/categories?PageNumber=1&PageSize=20",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -32,7 +38,7 @@
 								},
 								{
 									"key": "PageSize",
-									"value": "10"
+									"value": "20"
 								}
 							]
 						}
@@ -64,10 +70,16 @@
 					"name": "Create",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJNYW5hZ2VyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2UzNmY3NTdhZmMxMGU4M2QzZTc2ZSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5NTEzMTEzLCJleHAiOjE3NDk1OTk1MTMsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6Y2F0YWxvZyIsImRlbGV0ZTpjYXRhbG9nIiwicmVhZDpjYXRhbG9nIiwidXBkYXRlOmNhdGFsb2ciXX0.ALRIWkkAgwsd77ypZnYTMJ2u9BY3THCNneq5bCDk0GZwLDq1M7PVM21lzAy8lJ3cAmgGG5ytoVRz0sBr6d8cW2XHwEf2gBrfxTl_vrw3m25qEhB0ly6aNYYbHOLzoo_uZwUsp13rqeOufYeceF4YZFvt6OJpte8qkPls7fOgldETc72pGz66yOvEbVBxg9Mrh_Txt3Oi94iqSUOQls7P-a5--SBwBEs_kiUYdBHNVP0sCJQ8x2IDmRq88If4NAcaEXPwLSaTqCnKOM7dmrchpAIQRro6nr3xMhNuwc_dbu33RKNRZ6TgBAi0lmguiZd-pC9xJOKrkg9LtV3pMPEgzw",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Lorem ipsum dolor sit amet, consectetur porttitor2212121221212\",\r\n    \"image\":\"https://imagenes.noticiasrcn.com/cms/2024/08/21165207/televisores-por-menos-de-quinientos-mil-pesos-en-falabella.webp?r=4_3\",\r\n    \"parentCategoryId\": 8\r\n}",
+							"raw": "{\r\n    \"name\":\"Auth behavior\",\r\n    \"image\":\"https://imagenes.noticiasrcn.com/cms/2024/08/21165207/televisores-por-menos-de-quinientos-mil-pesos-en-falabella.webp?r=4_3\",\r\n    \"parentCategoryId\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -75,7 +87,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:7167/api/categories/9",
+							"raw": "https://localhost:7167/api/categories",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -83,8 +95,7 @@
 							"port": "7167",
 							"path": [
 								"api",
-								"categories",
-								"9"
+								"categories"
 							]
 						}
 					},
@@ -150,9 +161,15 @@
 					"name": "List",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJTdG9yZUN1c3RvbWVyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2U0MTY2MTc4NTY1ZTQzOTk4ZmEwMiIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5Njk2MzIyLCJleHAiOjE3NDk3ODI3MjIsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJhbGw6Y2FydGluZyIsInJlYWQ6Y2F0YWxvZyJdfQ.kTfyxF051h-rP42Juu0NNK2fA8vRipLvoSV9XdlwsBqp0Iigfl_aakCRxkBnoijGxUfOjbUifcajKg2-6ypNh5Ys8w7mmjPYK-t4E0MO9vXatC-PD93q3BW6N_edKWfSUYiJkVlPFIoN44Y63AK0Uf8rzxc5ILq_9wlKOMHVTyt7uUkMtl4vXbc-iR3gl7TeLcEcIGURNhdx-ux2Fn2564hHKsHuukD22bUGnq_56dpcojYh6vLPNxnGl2qU4UDsZDTc4aGeJvLTz-2PwQkHyxDtpWqlX99HSGXfce-ATTmQ3uIG-Z7jSGrCqgHHs5MoofCEObhKT8_VTcJRRxz6BA",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "https://localhost:7167/api/products?PageNumber=1&PageSize=10",
+							"raw": "https://localhost:7167/api/products?PageNumber=1&PageSize=10&CategoryId=2",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -170,6 +187,10 @@
 								{
 									"key": "PageSize",
 									"value": "10"
+								},
+								{
+									"key": "CategoryId",
+									"value": "2"
 								}
 							]
 						}
@@ -201,10 +222,16 @@
 					"name": "Create",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJNYW5hZ2VyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2UzNmY3NTdhZmMxMGU4M2QzZTc2ZSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5NTYwMDg1LCJleHAiOjE3NDk2NDY0ODUsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6Y2F0YWxvZyIsImRlbGV0ZTpjYXRhbG9nIiwicmVhZDpjYXRhbG9nIiwidXBkYXRlOmNhdGFsb2ciXX0.UooE-iqVOtVpxHkUFpsb2qF3RtvioGl_Wv8qO00QKZ4L2NNadubHirSsxkxZOtoQZ1uJ73RyI6j9H1WaXsUaW2pLM11uNJyV1ZPavt3qnxHCyKpq0YZjinTotZ3ULJlDZ-6GHNpsfLhaW-vI8geX5AqGEshnwArgVmk5tYVI6EmTQYLA6QA_jLOeO8zbzkIolAEbp0ZPBv4tUaMGYRRk4YPbxua5vX00S7rTo26bHhjclMvqEgLy9EWwniHJOJdbmmmx2PGixkZqiJ_C5lapvkoVVpmY1S_Q8SOAyPJd-exXK7IPgPmHQIEfkporghL_NwfVqe4CTEERVrsTL--trg",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"43\",\r\n    \"image\":\"\",\r\n    \"description\":\"Error\",\r\n    \"categoryId\": 4,\r\n    \"price\": 200,\r\n    \"amount\": 1\r\n}",
+							"raw": "{\r\n    \"name\":\"Mouse\",\r\n    \"image\":\"\",\r\n    \"description\":\"Con cable\",\r\n    \"categoryId\": 1,\r\n    \"price\": 18000,\r\n    \"amount\": 18\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -230,10 +257,16 @@
 					"name": "Update",
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJNYW5hZ2VyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2UzNmY3NTdhZmMxMGU4M2QzZTc2ZSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5NTYwMDg1LCJleHAiOjE3NDk2NDY0ODUsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJjcmVhdGU6Y2F0YWxvZyIsImRlbGV0ZTpjYXRhbG9nIiwicmVhZDpjYXRhbG9nIiwidXBkYXRlOmNhdGFsb2ciXX0.UooE-iqVOtVpxHkUFpsb2qF3RtvioGl_Wv8qO00QKZ4L2NNadubHirSsxkxZOtoQZ1uJ73RyI6j9H1WaXsUaW2pLM11uNJyV1ZPavt3qnxHCyKpq0YZjinTotZ3ULJlDZ-6GHNpsfLhaW-vI8geX5AqGEshnwArgVmk5tYVI6EmTQYLA6QA_jLOeO8zbzkIolAEbp0ZPBv4tUaMGYRRk4YPbxua5vX00S7rTo26bHhjclMvqEgLy9EWwniHJOJdbmmmx2PGixkZqiJ_C5lapvkoVVpmY1S_Q8SOAyPJd-exXK7IPgPmHQIEfkporghL_NwfVqe4CTEERVrsTL--trg",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 3,\r\n    \"name\":\"Samsumg 43 pulgadas\",\r\n    \"image\":\"https://i.ytimg.com/vi/tCS2m0UDILc/maxresdefault.jpg\",\r\n    \"description\":\"Smart TV Tizen\",\r\n    \"categoryId\": 4,\r\n    \"price\": 2500,\r\n    \"amount\": 2\r\n}",
+							"raw": "{\r\n            \"id\": 1,\r\n            \"name\": \"Manzana\",\r\n            \"description\": \"Roja\",\r\n            \"categoryId\": \"2\",\r\n            \"image\": \"string\",\r\n            \"amount\": 50,\r\n            \"price\": 3000.00\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,7 +274,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://localhost:7167/api/products/3",
+							"raw": "https://localhost:7167/api/products/1",
 							"protocol": "https",
 							"host": [
 								"localhost"
@@ -250,7 +283,7 @@
 							"path": [
 								"api",
 								"products",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -272,6 +305,212 @@
 								"api",
 								"products",
 								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carting",
+			"item": [
+				{
+					"name": "GetCart V2",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJNYW5hZ2VyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2UzNmY3NTdhZmMxMGU4M2QzZTc2ZSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5Njk1OTMxLCJleHAiOjE3NDk3ODIzMzEsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJhbGw6Y2FydGluZyIsImNyZWF0ZTpjYXRhbG9nIiwiZGVsZXRlOmNhdGFsb2ciLCJyZWFkOmNhdGFsb2ciLCJ1cGRhdGU6Y2F0YWxvZyJdfQ.VmjJQKHJvbjVSyAGHigCZlvMB8AmPHaQHPjGuVSUgfTkFvZFHJq9wRuuJif4FjxH-hXkbD2kG_IlaJqtTvThyxSwu3KefgI9ThYAWa7s3FG9mfUbQZszqn2B_5Zf6pASUcJQbmH6TtbVMOxp33Xv-aAD0GxxTJ9ja8nMm7vCJowZnDYTmRenQbBC86641v6x7C2XSTT-0zIeWvX5-rIHq_9YzrfhivcrKolrTPxMBES5r-hiiG3rtZczLlFst1In7PW-Bwhq2JqiDyagts7tMuhmnzDBz8RDxd5O1q8HoXvPBg2uZAMqnpag4jat71gwHM3Fi09oKLlONMhuyWLM5Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7235/api/v2/cart/colmedica",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7235",
+							"path": [
+								"api",
+								"v2",
+								"cart",
+								"colmedica"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCart V1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJNYW5hZ2VyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2UzNmY3NTdhZmMxMGU4M2QzZTc2ZSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5Njk1OTMxLCJleHAiOjE3NDk3ODIzMzEsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJhbGw6Y2FydGluZyIsImNyZWF0ZTpjYXRhbG9nIiwiZGVsZXRlOmNhdGFsb2ciLCJyZWFkOmNhdGFsb2ciLCJ1cGRhdGU6Y2F0YWxvZyJdfQ.VmjJQKHJvbjVSyAGHigCZlvMB8AmPHaQHPjGuVSUgfTkFvZFHJq9wRuuJif4FjxH-hXkbD2kG_IlaJqtTvThyxSwu3KefgI9ThYAWa7s3FG9mfUbQZszqn2B_5Zf6pASUcJQbmH6TtbVMOxp33Xv-aAD0GxxTJ9ja8nMm7vCJowZnDYTmRenQbBC86641v6x7C2XSTT-0zIeWvX5-rIHq_9YzrfhivcrKolrTPxMBES5r-hiiG3rtZczLlFst1In7PW-Bwhq2JqiDyagts7tMuhmnzDBz8RDxd5O1q8HoXvPBg2uZAMqnpag4jat71gwHM3Fi09oKLlONMhuyWLM5Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7235/api/Cart/exito",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7235",
+							"path": [
+								"api",
+								"Cart",
+								"exito"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJTdG9yZUN1c3RvbWVyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2U0MTY2MTc4NTY1ZTQzOTk4ZmEwMiIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5Njk2MzIyLCJleHAiOjE3NDk3ODI3MjIsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJhbGw6Y2FydGluZyIsInJlYWQ6Y2F0YWxvZyJdfQ.kTfyxF051h-rP42Juu0NNK2fA8vRipLvoSV9XdlwsBqp0Iigfl_aakCRxkBnoijGxUfOjbUifcajKg2-6ypNh5Ys8w7mmjPYK-t4E0MO9vXatC-PD93q3BW6N_edKWfSUYiJkVlPFIoN44Y63AK0Uf8rzxc5ILq_9wlKOMHVTyt7uUkMtl4vXbc-iR3gl7TeLcEcIGURNhdx-ux2Fn2564hHKsHuukD22bUGnq_56dpcojYh6vLPNxnGl2qU4UDsZDTc4aGeJvLTz-2PwQkHyxDtpWqlX99HSGXfce-ATTmQ3uIG-Z7jSGrCqgHHs5MoofCEObhKT8_VTcJRRxz6BA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2,\r\n  \"name\": \"Pera\",\r\n  \"image\": \"\",\r\n  \"price\": 20,\r\n  \"quantity\": 15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7235/api/Cart/colmedica",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7235",
+							"path": [
+								"api",
+								"Cart",
+								"colmedica"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cart",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IktRX25sSjBCNkdCZXhYVkdzR0VmRyJ9.eyJNZW50b3JpbmdBZHZhbmNlZC9yb2xlcyI6WyJTdG9yZUN1c3RvbWVyIl0sImlzcyI6Imh0dHBzOi8vZGV2LTV0cXJyMDg1b2NwZjcxZGIudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4M2U0MTY2MTc4NTY1ZTQzOTk4ZmEwMiIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjcxNjcvIiwiaWF0IjoxNzQ5Njk2MzIyLCJleHAiOjE3NDk3ODI3MjIsImd0eSI6InBhc3N3b3JkIiwiYXpwIjoielVHbWExNnZxZlZlOHh3amZSMHp0a2dic2VpdmxXQ3oiLCJwZXJtaXNzaW9ucyI6WyJhbGw6Y2FydGluZyIsInJlYWQ6Y2F0YWxvZyJdfQ.kTfyxF051h-rP42Juu0NNK2fA8vRipLvoSV9XdlwsBqp0Iigfl_aakCRxkBnoijGxUfOjbUifcajKg2-6ypNh5Ys8w7mmjPYK-t4E0MO9vXatC-PD93q3BW6N_edKWfSUYiJkVlPFIoN44Y63AK0Uf8rzxc5ILq_9wlKOMHVTyt7uUkMtl4vXbc-iR3gl7TeLcEcIGURNhdx-ux2Fn2564hHKsHuukD22bUGnq_56dpcojYh6vLPNxnGl2qU4UDsZDTc4aGeJvLTz-2PwQkHyxDtpWqlX99HSGXfce-ATTmQ3uIG-Z7jSGrCqgHHs5MoofCEObhKT8_VTcJRRxz6BA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "1",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7235/api/Cart/exito",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7235",
+							"path": [
+								"api",
+								"Cart",
+								"exito"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "Admin token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"grant_type\": \"password\",\r\n    \"username\": \"hpaezgutierrez@gmail.com\",\r\n    \"password\": \"Password1!\",\r\n    \"audience\": \"https://localhost:7167/\",\r\n    \"client_id\": \"zUGma16vqfVe8xwjfR0ztkgbseivlWCz\",\r\n    \"client_secret\": \"QcdyYRBLFmENtsSeyPmbjHYXvACJ1AnK1s3W2lgtmSC5OFHU1yBjkACwbM6j0KwY\",\r\n    \"scope\":\"openid profile offline_access\"\r\n}"
+						},
+						"url": {
+							"raw": "https://dev-5tqrr085ocpf71db.us.auth0.com/oauth/token",
+							"protocol": "https",
+							"host": [
+								"dev-5tqrr085ocpf71db",
+								"us",
+								"auth0",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Customer token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"grant_type\": \"password\",\r\n    \"username\": \"hpaez.intergrupo@gmail.com\",\r\n    \"password\": \"Password1!\",\r\n    \"audience\": \"https://localhost:7167/\",\r\n    \"client_id\": \"zUGma16vqfVe8xwjfR0ztkgbseivlWCz\",\r\n    \"client_secret\": \"QcdyYRBLFmENtsSeyPmbjHYXvACJ1AnK1s3W2lgtmSC5OFHU1yBjkACwbM6j0KwY\",\r\n    \"scope\":\"openid profile offline_access\"\r\n}"
+						},
+						"url": {
+							"raw": "https://dev-5tqrr085ocpf71db.us.auth0.com/oauth/token",
+							"protocol": "https",
+							"host": [
+								"dev-5tqrr085ocpf71db",
+								"us",
+								"auth0",
+								"com"
+							],
+							"path": [
+								"oauth",
+								"token"
 							]
 						}
 					},
