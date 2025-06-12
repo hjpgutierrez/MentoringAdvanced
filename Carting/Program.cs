@@ -6,6 +6,7 @@ using Carting.BLL.Services;
 using Carting.Configuration;
 using Carting.DAL.MessageBrokers;
 using Carting.DAL.Persistence;
+using Carting.Middleware;
 using Carting.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -91,6 +92,8 @@ namespace Carting
             }
 
             app.UseHttpsRedirection();
+            app.UseMiddleware<AccessTokenLoggingMiddleware>();
+
 
             app.UseAuthentication();
             app.UseAuthorization();
