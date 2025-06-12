@@ -466,7 +466,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"grant_type\": \"password\",\r\n    \"username\": \"hpaezgutierrez@gmail.com\",\r\n    \"password\": \"Password1!\",\r\n    \"audience\": \"https://localhost:7167/\",\r\n    \"client_id\": \"zUGma16vqfVe8xwjfR0ztkgbseivlWCz\",\r\n    \"client_secret\": \"QcdyYRBLFmENtsSeyPmbjHYXvACJ1AnK1s3W2lgtmSC5OFHU1yBjkACwbM6j0KwY\"\r\n}"
+							"raw": "{\r\n    \"grant_type\": \"password\",\r\n    \"username\": \"hpaezgutierrez@gmail.com\",\r\n    \"password\": \"Password1!\",\r\n    \"audience\": \"https://localhost:7167/\",\r\n    \"client_id\": \"zUGma16vqfVe8xwjfR0ztkgbseivlWCz\",\r\n    \"client_secret\": \"QcdyYRBLFmENtsSeyPmbjHYXvACJ1AnK1s3W2lgtmSC5OFHU1yBjkACwbM6j0KwY\",\r\n    \"scope\":\"openid profile offline_access\"\r\n}"
 						},
 						"url": {
 							"raw": "https://dev-5tqrr085ocpf71db.us.auth0.com/oauth/token",
@@ -497,7 +497,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"grant_type\": \"password\",\r\n    \"username\": \"hpaez.intergrupo@gmail.com\",\r\n    \"password\": \"Password1!\",\r\n    \"audience\": \"https://localhost:7167/\",\r\n    \"client_id\": \"zUGma16vqfVe8xwjfR0ztkgbseivlWCz\",\r\n    \"client_secret\": \"QcdyYRBLFmENtsSeyPmbjHYXvACJ1AnK1s3W2lgtmSC5OFHU1yBjkACwbM6j0KwY\"\r\n}"
+							"raw": "{\r\n    \"grant_type\": \"password\",\r\n    \"username\": \"hpaez.intergrupo@gmail.com\",\r\n    \"password\": \"Password1!\",\r\n    \"audience\": \"https://localhost:7167/\",\r\n    \"client_id\": \"zUGma16vqfVe8xwjfR0ztkgbseivlWCz\",\r\n    \"client_secret\": \"QcdyYRBLFmENtsSeyPmbjHYXvACJ1AnK1s3W2lgtmSC5OFHU1yBjkACwbM6j0KwY\",\r\n    \"scope\":\"openid profile offline_access\"\r\n}"
 						},
 						"url": {
 							"raw": "https://dev-5tqrr085ocpf71db.us.auth0.com/oauth/token",
