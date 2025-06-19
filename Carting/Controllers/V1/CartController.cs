@@ -1,6 +1,7 @@
 ﻿using Carting.BLL.DTOs;
 using Carting.BLL.Interfaces;
 using Carting.BLL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Carting.Controllers.V1
@@ -8,6 +9,7 @@ namespace Carting.Controllers.V1
     [Route("api/[controller]")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [Authorize("all:carting")]
     public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;
@@ -18,7 +20,7 @@ namespace Carting.Controllers.V1
         }
 
         // GET api/<CartController>/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}")]        
         public ActionResult<Cart> Get(string id)
         {
             Cart cart = _cartService.GetCart(id);

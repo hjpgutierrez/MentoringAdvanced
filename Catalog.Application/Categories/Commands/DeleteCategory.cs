@@ -1,7 +1,9 @@
 ﻿using Catalog.Application.Common.Interfaces;
+using Catalog.Application.Common.Security;
 
 namespace Catalog.Application.Categories.Commands
 {
+    [Authorize(Roles = "Manager")]
     public record DeleteCategoryCommand(int Id) : IRequest;
 
     public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand>

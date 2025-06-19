@@ -1,8 +1,9 @@
-﻿using Ardalis.GuardClauses;
-using Catalog.Application.Common.Interfaces;
+﻿using Catalog.Application.Common.Interfaces;
+using Catalog.Application.Common.Security;
 
 namespace Catalog.Application.Products.Queries
 {
+    [Authorize(Permission = "read:catalog")]
     public record GetProductQuery(int Id): IRequest<ProductDto>;
 
     public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDto>
