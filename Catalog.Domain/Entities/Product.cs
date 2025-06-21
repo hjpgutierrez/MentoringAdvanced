@@ -4,7 +4,7 @@ namespace Catalog.Domain.Entities
 {
     public class Product : AuditableEntity
     {
-        private string _name;
+        private string _name = string.Empty;
         public required string Name
         {
             get => _name;
@@ -14,7 +14,7 @@ namespace Catalog.Domain.Entities
                 {
                     AddDomainEvent(new ProductChangedEvent(this));
                 }
-                
+
                 _name = value;
             }
         }
@@ -38,7 +38,7 @@ namespace Catalog.Domain.Entities
 
 
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
 
         private decimal _price;

@@ -135,7 +135,7 @@ public class CartServiceTests
         var cartId = "validCartId";
         var itemId = 1;
         var item = new Item { Id = itemId };
-        var existingCart = new Cart { Id = cartId };
+        var existingCart = new Cart { Id = cartId, Code = "test" };
         existingCart.AddItem(item);
         
 

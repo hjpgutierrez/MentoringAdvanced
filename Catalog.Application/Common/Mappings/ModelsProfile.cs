@@ -28,7 +28,7 @@ namespace Catalog.Application.Common.Mappings
                             .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Price))
                             .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.Amount))
                             .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
-                            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+                            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src!.Category!.Name))
                             ;
         }
     }

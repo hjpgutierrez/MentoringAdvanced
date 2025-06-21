@@ -23,7 +23,7 @@ namespace Carting.Controllers.V2
         [HttpGet("{id}")]
         public ActionResult<Cart> Get(string id)
         {
-            Cart cart = _cartService.GetCart(id);
+            var cart = _cartService.GetCart(id);
             if (cart == null || string.IsNullOrEmpty(cart?.Id))
             {
                 return NotFound();

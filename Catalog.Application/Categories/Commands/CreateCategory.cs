@@ -8,9 +8,9 @@ namespace Catalog.Application.Categories.Commands
     [Authorize(Roles = "Manager")]    
     public class CreateCategoryCommand : IRequest<int>
     {
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         public int? ParentCategoryId { get; set; }
     }

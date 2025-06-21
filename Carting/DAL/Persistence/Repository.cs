@@ -9,7 +9,7 @@ namespace Carting.DAL.Persistence
     {
         private readonly IMongoDatabase _database;
         private IMongoCollection<TEntity> _collection;
-        private IMongoCollection<Cart> _newCollection;
+        private IMongoCollection<Cart>? _newCollection;
 
         public ILogger<Repository<TEntity>> _logger { get; }
 
