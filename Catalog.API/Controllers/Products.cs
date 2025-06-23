@@ -2,7 +2,7 @@
 using Catalog.Application.Models;
 using Catalog.Application.Products.Commands;
 using Catalog.API.Helpers;
-
+// Test-pre-push
 namespace Catalog.API.Controllers
 {
     public class Products : EndpointGroupBase
