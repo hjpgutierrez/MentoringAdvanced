@@ -37,10 +37,7 @@ namespace Carting.DAL.Persistence
             return true;
         }
 
-        public TEntity GetDocumentById(string code)
-        {
-           return  _collection.Find(x => x.Code == code).FirstOrDefault();            
-        }
+        public TEntity GetDocumentById(string code) => _collection.Find(x => x.Code == code).FirstOrDefault();
 
         public bool DeleteDocument(string code)
         {
@@ -60,10 +57,11 @@ namespace Carting.DAL.Persistence
                 var documents = _newCollection.Find(filter).ToList();
                 return documents;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 _logger.LogError(ex, ex.Message);
                 return Array.Empty<Cart>();
-            }            
+            }
         }
     }
 }

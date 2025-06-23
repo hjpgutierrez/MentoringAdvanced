@@ -35,16 +35,10 @@ namespace Carting.Controllers.V2
 
         // POST api/<CartController>/5
         [HttpPost("{id}")]
-        public IActionResult Post(string id, [FromBody] Item value)
-        {        
-            return _cartService.AddItem(id, value) ? Ok() : BadRequest();
-        }
+        public IActionResult Post(string id, [FromBody] Item value) => _cartService.AddItem(id, value) ? Ok() : BadRequest();
 
         // DELETE api/<CartController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id, [FromBody] int itemId)
-        {
-            return _cartService.RemoveItem(id, itemId) ? Ok() : BadRequest();
-        }
+        public IActionResult Delete(string id, [FromBody] int itemId) => _cartService.RemoveItem(id, itemId) ? Ok() : BadRequest();
     }
 }

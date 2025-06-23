@@ -5,7 +5,7 @@ using Catalog.Domain.Entities;
 
 namespace Catalog.Application.Categories.Commands
 {
-    [Authorize(Roles = "Manager")]    
+    [Authorize(Roles = "Manager")]
     public class CreateCategoryCommand : IRequest<int>
     {
         public required string Name { get; set; }
@@ -25,7 +25,7 @@ namespace Catalog.Application.Categories.Commands
         }
 
         public async Task<int> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
-        {            
+        {
             var entity = new Category
             {
                 Image = request.Image,

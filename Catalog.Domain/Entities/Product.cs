@@ -31,7 +31,7 @@ namespace Catalog.Domain.Entities
                 {
                     AddDomainEvent(new ProductChangedEvent(this));
                 }
-               
+
                 _image = value;
             }
         }

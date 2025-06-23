@@ -1,11 +1,11 @@
 ﻿namespace Carting.UnitTests.BLL;
 
 using System;
-using Xunit;
-using NSubstitute;
+using Carting.BLL.Interfaces;
 using Carting.BLL.Models;
 using Carting.BLL.Services;
-using Carting.BLL.Interfaces;
+using NSubstitute;
+using Xunit;
 
 public class CartServiceTests
 {
@@ -137,7 +137,7 @@ public class CartServiceTests
         var item = new Item { Id = itemId };
         var existingCart = new Cart { Id = cartId, Code = "test" };
         existingCart.AddItem(item);
-        
+
 
         _repository.GetDocumentById(cartId).Returns(existingCart);
         _repository.UpdateDocument(existingCart).Returns(true);

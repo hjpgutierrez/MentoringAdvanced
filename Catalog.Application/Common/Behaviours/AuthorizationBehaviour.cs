@@ -1,8 +1,8 @@
-﻿using Catalog.Application.Common.Exceptions;
+﻿using System.Data;
+using System.Reflection;
+using Catalog.Application.Common.Exceptions;
 using Catalog.Application.Common.Interfaces;
 using Catalog.Application.Common.Security;
-using System.Data;
-using System.Reflection;
 
 namespace Catalog.Application.Common.Behaviours;
 

@@ -1,7 +1,7 @@
-﻿using Carting.BLL.Interfaces;
+﻿using System.Text;
+using Carting.BLL.Interfaces;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Text;
 
 namespace Carting.DAL.MessageBrokers;
 public class RabbitMqMessageConsumer : BackgroundService

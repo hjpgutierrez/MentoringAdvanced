@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Catalog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Catalog.Domain.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Catalog.Infrastructure.Persistence.Configurations
 {

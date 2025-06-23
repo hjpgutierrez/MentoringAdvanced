@@ -1,14 +1,15 @@
-using Catalog.Application.Categories.Commands;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
+using Catalog.Application.Categories.Commands;
 
 namespace Catalog.API.IntegrationTests
 {
-    public class CategoryControllerTests: IClassFixture<CatalogWebApplicationFactory>
+    public class CategoryControllerTests : IClassFixture<CatalogWebApplicationFactory>
     {
         private readonly HttpClient _httpClient;
         private string _controllerPath = "/api/Categories";
-        public CategoryControllerTests(CatalogWebApplicationFactory factory) {
+        public CategoryControllerTests(CatalogWebApplicationFactory factory)
+        {
             _httpClient = factory.CreateClient();
         }
 
@@ -27,7 +28,7 @@ namespace Catalog.API.IntegrationTests
         public async Task CreateCategory_HappyPath()
         {
             // Arrange       
-            var command = new CreateCategoryCommand() { Name = "TV", Image="www.miimage.com", ParentCategoryId=null};
+            var command = new CreateCategoryCommand() { Name = "TV", Image = "www.miimage.com", ParentCategoryId = null };
             var json = JsonSerializer.Serialize(command);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             // Act
@@ -36,7 +37,7 @@ namespace Catalog.API.IntegrationTests
             // Assert
             response.EnsureSuccessStatusCode();
             var responseBody = await response.Content.ReadAsStringAsync();
-            var result = int.Parse(responseBody); 
+            var result = int.Parse(responseBody);
             Assert.True(result > 0, $"Expected result to be greater than 0, but got {result}.");
 
         }

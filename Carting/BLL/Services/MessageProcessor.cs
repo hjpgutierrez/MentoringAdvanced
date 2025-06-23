@@ -1,6 +1,6 @@
-﻿using Carting.BLL.DTOs;
+﻿using System.Text.Json;
+using Carting.BLL.DTOs;
 using Carting.BLL.Interfaces;
-using System.Text.Json;
 
 namespace Carting.BLL.Services
 {
@@ -24,7 +24,8 @@ namespace Carting.BLL.Services
 
             var carts = _cartService.GetDocumentsByItemId(productEvent!.Id);
 
-            foreach (var cart in carts) {
+            foreach (var cart in carts)
+            {
                 _logger.LogInformation($"Cart code: {cart.Code}");
                 var itemToChange = cart.GetItem(productEvent.Id);
                 itemToChange.Name = productEvent.Name;

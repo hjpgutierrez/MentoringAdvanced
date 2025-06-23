@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
 using Catalog.Application.Common.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Catalog.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public ApplicationDbContext(DbContextOptions options) 
+        public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
         }
@@ -25,7 +25,7 @@ namespace Catalog.Infrastructure.Persistence
             {
                 property.SetPrecision(18);
                 property.SetScale(2);
-            }            
+            }
 
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

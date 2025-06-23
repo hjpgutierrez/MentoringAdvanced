@@ -1,8 +1,8 @@
-﻿using Catalog.Application.Common.Interfaces;
-using System.Text;
-using RabbitMQ.Client;
+﻿using System.Text;
 using System.Text.Json;
+using Catalog.Application.Common.Interfaces;
 using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 
 namespace Catalog.Infrastructure.MessageBrokers
 {
@@ -17,7 +17,7 @@ namespace Catalog.Infrastructure.MessageBrokers
 
         public async Task PublishAsync<T>(T message, string routingKey)
         {
-            
+
             var factory = new ConnectionFactory { HostName = "localhost" };
             using var connection = await factory.CreateConnectionAsync();
             using var channel = await connection.CreateChannelAsync();
