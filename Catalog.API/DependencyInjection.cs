@@ -12,7 +12,7 @@ namespace Catalog.API
 
             services.AddScoped<IUser, CurrentUser>();
 
-            services.AddHttpContextAccessor();            
+            services.AddHttpContextAccessor();
 
             services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();

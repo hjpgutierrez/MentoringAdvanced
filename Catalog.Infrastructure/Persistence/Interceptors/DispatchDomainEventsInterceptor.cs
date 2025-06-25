@@ -32,7 +32,10 @@ public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
 
     public async Task DispatchDomainEvents(DbContext? context)
     {
-        if (context == null) return;
+        if (context == null)
+        {
+            return;
+        }
 
         var entities = context.ChangeTracker
             .Entries<BaseEntity>()
@@ -47,6 +50,8 @@ public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
         entities.ToList().ForEach(e => e.ClearDomainEvents());
 
         foreach (var domainEvent in domainEvents)
+        {
             await _mediator.Publish(domainEvent);
+        }
     }
 }

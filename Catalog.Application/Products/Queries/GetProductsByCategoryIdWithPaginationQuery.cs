@@ -25,14 +25,11 @@ namespace Catalog.Application.Products.Queries
             _mapper = mapper;
         }
 
-        public async Task<PaginatedList<ProductDto>> Handle(GetProductsByCategoryIdWithPaginationQuery request, CancellationToken cancellationToken)
-        {
-            return await _context.Products.Include(p => p.Category)
+        public async Task<PaginatedList<ProductDto>> Handle(GetProductsByCategoryIdWithPaginationQuery request, CancellationToken cancellationToken) => await _context.Products.Include(p => p.Category)
                 .Where(p => p.CategoryId == request.CategoryId)
                 .OrderBy(x => x.Name)
                 .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
                 .PaginatedListAsync(request.PageNumber, request.PageSize);
-        }
     }
 
     public class GetProductsByCategoryIdWithPaginationQueryValidator : AbstractValidator<GetProductsByCategoryIdWithPaginationQuery>

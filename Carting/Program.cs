@@ -1,4 +1,4 @@
-using Asp.Versioning;
+﻿using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using Asp.Versioning.Conventions;
 using Carting.BLL.Interfaces;
@@ -22,7 +22,7 @@ namespace Carting
             // Configure Authentication with JWT Bearer
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
-                {                    
+                {
                     options.Authority = domain;
                     options.Audience = builder.Configuration["Auth0:Audience"];
                 });
@@ -41,8 +41,8 @@ namespace Carting
             builder.Services.AddControllers();
             builder.Services.AddApiVersioning(options =>
             {
-                
-                options.DefaultApiVersion = new ApiVersion(1.0); 
+
+                options.DefaultApiVersion = new ApiVersion(1.0);
                 options.AssumeDefaultVersionWhenUnspecified = true;
 
                 options.ReportApiVersions = true;
@@ -63,7 +63,7 @@ namespace Carting
                 setup.GroupNameFormat = "'v'VVV";
                 setup.SubstituteApiVersionInUrl = true;
             });
-          
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

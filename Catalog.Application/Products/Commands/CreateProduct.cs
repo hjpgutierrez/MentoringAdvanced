@@ -8,7 +8,7 @@ namespace Catalog.Application.Products.Commands
     [Authorize(Roles = "Manager")]
     public class CreateProductCommand : IRequest<int>
     {
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         public string? Description { get; set; }
 

@@ -2,9 +2,23 @@
 <Project>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <!-- <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath> -->
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+  
   </PropertyGroup>
+  <PropertyGroup>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+        <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+        <CodeAnalysisTreatWarningsAsErrors>false</CodeAnalysisTreatWarningsAsErrors>
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+        <WarningsAsErrors>nullable</WarningsAsErrors>
+        <LangVersion>latest</LangVersion>
+     </PropertyGroup>
 </Project>

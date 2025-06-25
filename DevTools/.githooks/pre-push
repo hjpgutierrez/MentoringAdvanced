@@ -1,0 +1,17 @@
+#!/bin/bash
+
+echo "Running dotnet-format to check code formatting..."
+
+# Run dotnet-format on the entire solution
+dotnet format --verify-no-changes --severity error
+
+# Capture the exit code of dotnet-format
+FORMAT_EXIT_CODE=$?
+
+if [ $FORMAT_EXIT_CODE -ne 0 ]; then
+    echo "Code formatting issues detected. Please run 'dotnet format --severity error' to fix them."
+    exit 1
+fi
+
+echo "Code formatting check passed. Proceeding with push."
+exit 0

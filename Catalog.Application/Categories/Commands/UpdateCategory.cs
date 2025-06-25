@@ -9,9 +9,9 @@ namespace Catalog.Application.Categories.Commands
     {
         public int Id { get; init; }
 
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
-        public string Image { get; set; }
+        public string? Image { get; set; }
 
         public int? ParentCategoryId { get; set; }
     }

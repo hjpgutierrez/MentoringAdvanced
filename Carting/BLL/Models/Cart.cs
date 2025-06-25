@@ -1,5 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Carting.BLL.Models
 {
@@ -22,10 +22,15 @@ namespace Carting.BLL.Models
 
         public bool AddItem(Item item)
         {
-            if (item == null) throw new ArgumentNullException("item");
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
 
             if (Items.Any(i => i.Id == item.Id))
+            {
                 return false;
+            }
 
             Items.Add(item);
             return true;
@@ -33,13 +38,18 @@ namespace Carting.BLL.Models
 
         public bool RemoveItem(Item item)
         {
-            if (item == null) throw new ArgumentNullException("item");
+            if (item == null)
+            {
+                throw new ArgumentNullException("item");
+            }
 
             if (!Items.Any(i => i.Id == item.Id))
+            {
                 return false;
+            }
 
             Items.Remove(item);
             return true;
         }
-    }    
+    }
 }

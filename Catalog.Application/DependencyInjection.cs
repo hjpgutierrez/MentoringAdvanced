@@ -1,7 +1,7 @@
-﻿using Catalog.Application.Categories.Queries;
+﻿using System.Reflection;
+using Catalog.Application.Categories.Queries;
 using Catalog.Application.Common.Behaviours;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace Catalog.Application
 {

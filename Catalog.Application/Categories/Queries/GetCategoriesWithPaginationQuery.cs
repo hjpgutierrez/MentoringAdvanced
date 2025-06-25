@@ -23,13 +23,10 @@ namespace Catalog.Application.Categories.Queries
             _mapper = mapper;
         }
 
-        public async Task<PaginatedList<CategoryDto>> Handle(GetCategoriesWithPaginationQuery request, CancellationToken cancellationToken)
-        {
-            return await _context.Categories
+        public async Task<PaginatedList<CategoryDto>> Handle(GetCategoriesWithPaginationQuery request, CancellationToken cancellationToken) => await _context.Categories
                 .OrderBy(x => x.Name)
                 .ProjectTo<CategoryDto>(_mapper.ConfigurationProvider)
                 .PaginatedListAsync(request.PageNumber, request.PageSize);
-        }
     }
 
     public class GetCategoriesWithPaginationQueryValidator : AbstractValidator<GetCategoriesWithPaginationQuery>

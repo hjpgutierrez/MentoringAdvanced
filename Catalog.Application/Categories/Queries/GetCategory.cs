@@ -4,7 +4,7 @@ using Catalog.Application.Common.Security;
 namespace Catalog.Application.Categories.Queries
 {
     [Authorize(Permission = "read:catalog")]
-    public record GetCategoryQuery(int Id): IRequest<CategoryDto>;
+    public record GetCategoryQuery(int Id) : IRequest<CategoryDto>;
 
     public class GetCategoryQueryHandler : IRequestHandler<GetCategoryQuery, CategoryDto>
     {

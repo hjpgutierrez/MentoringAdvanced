@@ -1,8 +1,8 @@
-﻿using Catalog.Application.Common.Exceptions;
+﻿using System.Data;
+using System.Reflection;
+using Catalog.Application.Common.Exceptions;
 using Catalog.Application.Common.Interfaces;
 using Catalog.Application.Common.Security;
-using System.Data;
-using System.Reflection;
 
 namespace Catalog.Application.Common.Behaviours;
 
@@ -21,65 +21,52 @@ public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRe
 
         if (authorizeAttributes.Any())
         {
-            // Must be authenticated user
-            if (_user.Id == null)
+            EnsureUserIsAuthenticated();
+
+            if (HasAuthorization(authorizeAttributes, a => !string.IsNullOrWhiteSpace(a.Roles))
+                && !IsUserAuthorizedByRoles(authorizeAttributes))
             {
-                throw new UnauthorizedAccessException();
+                throw new ForbiddenAccessException();
             }
 
-
-            // Role-based authorization
-            var authorizeAttributesWithRoles = authorizeAttributes.Where(a => !string.IsNullOrWhiteSpace(a.Roles));
-            if (authorizeAttributesWithRoles.Any())
+            if (HasAuthorization(authorizeAttributes, a => !string.IsNullOrWhiteSpace(a.Permission))
+                && !IsUserAuthorizedByPermissions(authorizeAttributes))
             {
-                var authorized = false;
-
-                foreach (var roles in authorizeAttributesWithRoles.Select(a => a.Roles.Split(',')))
-                {
-                    foreach (var role in roles)
-                    {
-                        if (_user!.Roles!.Any(x => x == role))
-                        {
-                            authorized = true;
-                            break;
-                        }
-                    }
-                }
-
-                // Must be a member of at least one role in roles
-                if (!authorized)
-                {
-                    throw new ForbiddenAccessException();
-                }
-            }
-
-
-            // Permission-based authorization
-            var authorizeAttributesWithPolicies = authorizeAttributes.Where(a => !string.IsNullOrWhiteSpace(a.Permission));
-            if (authorizeAttributesWithPolicies.Any())
-            {
-                var authorized = false;
-
-                foreach (var permissions in authorizeAttributesWithPolicies.Select(a => a.Permission.Split(',')))
-                {
-                    foreach (var permission in permissions)
-                    {
-                        if (_user!.Permissions!.Any(x => x == permission))
-                        {
-                            authorized = true;
-                            break;
-                        }
-                    }
-
-                    if (!authorized)
-                    {
-                        throw new ForbiddenAccessException();
-                    }
-                }
+                throw new ForbiddenAccessException();
             }
         }
 
         // User is authorized / authorization not required
         return await next();
+    }
+
+    private void EnsureUserIsAuthenticated()
+    {
+        if (_user.Id == null)
+        {
+            throw new UnauthorizedAccessException();
+        }
+    }
+
+    private bool HasAuthorization(IEnumerable<AuthorizeAttribute> authorizeAttributes, Func<AuthorizeAttribute, bool> predicate)
+        => authorizeAttributes.Any(predicate);
+
+    private bool IsUserAuthorizedByRoles(IEnumerable<AuthorizeAttribute> authorizeAttributes)
+    {
+        var roles = authorizeAttributes
+            .Where(a => !string.IsNullOrWhiteSpace(a.Roles))
+            .SelectMany(a => a.Roles.Split(','));
+
+        return roles.Any(role => _user!.Roles!.Contains(role));
+    }
+
+
+    private bool IsUserAuthorizedByPermissions(IEnumerable<AuthorizeAttribute> authorizeAttributes)
+    {
+        var permissions = authorizeAttributes
+            .Where(a => !string.IsNullOrWhiteSpace(a.Permission))
+            .SelectMany(a => a.Permission.Split(','));
+
+        return permissions.Any(permission => _user!.Permissions!.Contains(permission));
     }
 }

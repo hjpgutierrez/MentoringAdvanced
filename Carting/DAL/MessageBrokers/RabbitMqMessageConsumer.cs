@@ -1,19 +1,21 @@
-﻿using Carting.BLL.Interfaces;
+﻿using System.Text;
+using Carting.BLL.Interfaces;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Text;
 
 namespace Carting.DAL.MessageBrokers;
 public class RabbitMqMessageConsumer : BackgroundService
 {
     const string ProductQueue = "product";
     private readonly IServiceProvider _serviceProvider;
-    private IConnection _connection;
-    private IChannel _channel;
+    private IConnection? _connection;
+    private IChannel? _channel;
 
     public RabbitMqMessageConsumer(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
+        _connection = null;
+        _channel = null;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -30,8 +32,8 @@ public class RabbitMqMessageConsumer : BackgroundService
 
     public override Task StopAsync(CancellationToken cancellationToken)
     {
-        _channel.Dispose();
-        _connection.Dispose();
+        _channel?.Dispose();
+        _connection?.Dispose();
         return Task.CompletedTask;
     }
 
@@ -52,14 +54,14 @@ public class RabbitMqMessageConsumer : BackgroundService
             logger.LogInformation($"message processed: {message}");
 
             // Acknowledge the message
-            await _channel.BasicAckAsync(eventArgument.DeliveryTag, false);
+            await _channel!.BasicAckAsync(eventArgument.DeliveryTag, false);
             logger.LogInformation($"Message acknowledged: {message}");
         }
         catch (Exception ex)
         {
             logger.LogError(ex, $"Error processing message: {ex.Message}");
             // Optionally reject the message
-            await _channel.BasicNackAsync(eventArgument.DeliveryTag, false, requeue: true);
+            await _channel!.BasicNackAsync(eventArgument.DeliveryTag, false, requeue: true);
         }
     }
 

@@ -6,7 +6,10 @@ namespace Catalog.Domain.Common
     {
         public bool Equals(BaseEvent? x, BaseEvent? y)
         {
-            if (x == null || y == null) return false;
+            if (x == null || y == null)
+            {
+                return false;
+            }
 
             // Define equality logic (e.g., compare by type or unique properties)
             return x.GetType() == y.GetType();
@@ -14,6 +17,7 @@ namespace Catalog.Domain.Common
 
         public int GetHashCode(BaseEvent obj)
         {
+            ArgumentNullException.ThrowIfNull(obj, nameof(obj));
             // Define hash code logic (combine type and unique properties)
             return HashCode.Combine(obj.GetType());
         }

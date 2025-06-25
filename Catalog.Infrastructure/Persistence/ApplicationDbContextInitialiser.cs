@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Catalog.Domain.Entities;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
-using Catalog.Domain.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace Catalog.Infrastructure.Persistence
 {
@@ -58,7 +58,7 @@ namespace Catalog.Infrastructure.Persistence
         }
 
         public async Task TrySeedAsync()
-        {            
+        {
             // Default data
             // Seed, if necessary
             if (!_context.Categories.Any())
