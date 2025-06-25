@@ -17,9 +17,9 @@ namespace Catalog.Infrastructure.Persistence
 
         public DbSet<Product> Products => Set<Product>();
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            foreach (var property in builder.Model.GetEntityTypes()
+            foreach (var property in modelBuilder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetProperties())
                 .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
             {
@@ -27,8 +27,8 @@ namespace Catalog.Infrastructure.Persistence
                 property.SetScale(2);
             }
 
-            base.OnModelCreating(builder);
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

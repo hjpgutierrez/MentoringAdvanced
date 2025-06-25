@@ -37,11 +37,11 @@ namespace Carting.DAL.Persistence
             return true;
         }
 
-        public TEntity GetDocumentById(string code) => _collection.Find(x => x.Code == code).FirstOrDefault();
+        public TEntity GetDocumentById(string id) => _collection.Find(x => x.Code == id).FirstOrDefault();
 
-        public bool DeleteDocument(string code)
+        public bool DeleteDocument(string id)
         {
-            _collection.DeleteOne(x => x.Code == code);
+            _collection.DeleteOne(x => x.Code == id);
             return true;
         }
 
