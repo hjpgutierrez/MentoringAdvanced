@@ -66,6 +66,7 @@ Once the services are running, you can access them as follows:
     -   Host: `localhost`
     -   Port: `27017`
     -   Authentication: (If authentication is disabled, no credentials are required. Otherwise, use the credentials specified in the `docker-compose.yml` file.)
+    -   ConnectionString: `mongodb://{user}:{password}@localhost:27017`
 
 -   **MS SQL Server**:
 
@@ -73,7 +74,13 @@ Once the services are running, you can access them as follows:
     -   Port: `1433`
     -   Default Credentials:
         -   Username: `sa`
-        -   Password: `YourStrongPassword123`
+        -   Password: `{YourPasswordHere}`
+    -   ConnectionString:
+        -   Default: `Server=localhost,1433;Database=Catalog;User Id=sa;Password={YourPasswordHere};TrustServerCertificate=true`
+        -   Test: `Server=localhost,1433;Database=CatalogIntegrationTest;User Id=sa;Password={YourPasswordHere};TrustServerCertificate=true`
+
+-   **Auth0**:
+    -   Contact the developer team to create Manager and Customer users in [Auth0 Portal](https://dev-5tqrr085ocpf71db.us.auth0.com/)
 
 ---
 
