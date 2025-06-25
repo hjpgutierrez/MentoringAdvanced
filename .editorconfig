@@ -33,6 +33,9 @@ dotnet_diagnostic.IDE0022.severity = error
 # Always add curly braces { } to conditionals
 dotnet_diagnostic.IDE0011.severity = error
 
+# Consider making public types internal
+dotnet_diagnostic.CA1515.severity = none
+
 # Analyzers
 dotnet_analyzer_diagnostic.category-Security.severity = error
 dotnet_code_quality.ca1802.api_surface = private, internal

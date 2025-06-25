@@ -10,8 +10,8 @@ This project is a program designed for .NET specialists who want to fill their t
 
 Before running the services, ensure you have the following installed on your machine:
 
-- [Docker](https://www.docker.com/get-started)
-- [Docker Compose](https://docs.docker.com/compose/install/)
+-   [Docker](https://www.docker.com/get-started)
+-   [Docker Compose](https://docs.docker.com/compose/install/)
 
 ---
 
@@ -54,26 +54,26 @@ To run the required services (RabbitMQ, MongoDB, and MS SQL Server), follow thes
 
 Once the services are running, you can access them as follows:
 
-- **RabbitMQ Management UI**:
+-   **RabbitMQ Management UI**:
 
-  - URL: [http://localhost:15672](http://localhost:15672/)
-  - Default Credentials:
-    - Username: `guest`
-    - Password: `guest`
+    -   URL: [http://localhost:15672](http://localhost:15672/)
+    -   Default Credentials:
+        -   Username: `guest`
+        -   Password: `guest`
 
-- **MongoDB**:
+-   **MongoDB**:
 
-  - Host: `localhost`
-  - Port: `27017`
-  - Authentication: (If authentication is disabled, no credentials are required. Otherwise, use the credentials specified in the `docker-compose.yml` file.)
+    -   Host: `localhost`
+    -   Port: `27017`
+    -   Authentication: (If authentication is disabled, no credentials are required. Otherwise, use the credentials specified in the `docker-compose.yml` file.)
 
-- **MS SQL Server**:
+-   **MS SQL Server**:
 
-  - Host: `localhost`
-  - Port: `1433`
-  - Default Credentials:
-    - Username: `sa`
-    - Password: `YourStrongPassword123`
+    -   Host: `localhost`
+    -   Port: `1433`
+    -   Default Credentials:
+        -   Username: `sa`
+        -   Password: `YourStrongPassword123`
 
 ---
 
@@ -89,13 +89,53 @@ docker-compose down
 
 ---
 
+## SonarQube
+
+1. To start SonarQube, execute the following command to run it as a Docker container:
+
+```
+ docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest
+```
+
+2. SonarScanner is required to analyze your project. Install it globally using the following command:
+
+```
+dotnet tool install --global dotnet-sonarscanner
+```
+
+3. Once the project is created in the [Sonar UI](http://localhost:9000), it will generate a token, copy the project name and token:
+
+```
+ dotnet sonarscanner begin /k:"MentoringAdvanced" /d:sonar.host.url="http://localhost:9000"  /d:sonar.token="sqp_0c9ded2b962a66d937d197fcd6af6ea52bb6e5c7"
+```
+
+4. SonarScanner analyzes your project binaries, so ensure your code is compiled before proceeding. Use the following command to build your project:
+
+```
+ dotnet build
+```
+
+5.  After building your project, finalize the scan to generate the analysis report:
+
+```
+dotnet sonarscanner end /d:sonar.token="sqp_0c9ded2b962a66d937d197fcd6af6ea52bb6e5c7"
+```
+
+6. Go back to the [Sonar UI](http://localhost:9000) and navigate to your project dashboard to view the analysis results
+
+---
+
 ## Troubleshooting
 
-- **If you encounter issues with MongoDB authentication**:
+-   **If you encounter issues with MongoDB authentication**:
 
-  - Ensure that the `docker-compose.yml` file is configured to either disable authentication (`mongod --noauth`) or use the correct credentials in your application.
+    -   Ensure that the `docker-compose.yml` file is configured to either disable authentication (`mongod --noauth`) or use the correct credentials in your application.
 
-- **If ports are already in use**:
+-   **If ports are already in use**:
 
-  - Make sure no other services are running on the same ports (e.g., `5672`, `15672`, `27017`, `1433`).
-  - You can update the `docker-compose.yml` file to use different host ports if needed.
+    -   Make sure no other services are running on the same ports (e.g., `5672`, `15672`, `27017`, `1433`).
+    -   You can update the `docker-compose.yml` file to use different host ports if needed.
+
+-   **If you encounter issues, check the SonarQube logs using the following command**:
+
+    -   `docker logs sonarqube`
