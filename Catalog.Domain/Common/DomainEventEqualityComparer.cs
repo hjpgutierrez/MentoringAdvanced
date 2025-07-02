@@ -10,7 +10,7 @@ namespace Catalog.Domain.Common
                 return false;
             
 
-            // Define equality logic (e.g., compare by type or unique properties)
+            // Define equality logic (e.g., compare by type or unique properties) tata
             return x.GetType() == y.GetType();
         }
 
