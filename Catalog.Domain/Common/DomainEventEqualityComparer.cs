@@ -7,10 +7,12 @@ namespace Catalog.Domain.Common
         public bool Equals(BaseEvent? x, BaseEvent? y)
         {
             if (x == null || y == null)
+            {
                 return false;
-            
+            }
 
-            // Define equality logic (e.g., compare by type or unique properties) tata
+
+            // Define equality logic (e.g., compare by type or unique properties)
             return x.GetType() == y.GetType();
         }
 
