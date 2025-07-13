@@ -4,7 +4,7 @@ using Catalog.Application.Common.Security;
 namespace Catalog.Application.Products.Queries
 {
     [Authorize(Permission = "read:catalog")]
-    public record GetProductQuery(int Id): IRequest<ProductDto>;
+    public record GetProductQuery(int Id) : IRequest<ProductDto>;
 
     public class GetProductQueryHandler : IRequestHandler<GetProductQuery, ProductDto>
     {

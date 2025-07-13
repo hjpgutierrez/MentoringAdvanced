@@ -20,12 +20,12 @@ namespace Carting.Controllers.V1
         }
 
         // GET api/<CartController>/5
-        [HttpGet("{id}")]        
+        [HttpGet("{id}")]
         public ActionResult<Cart> Get(string id)
         {
-            Cart cart = _cartService.GetCart(id);
+            var cart = _cartService.GetCart(id);
             if (cart == null || string.IsNullOrEmpty(cart?.Id))
-            { 
+            {
                 return NotFound();
             }
 
@@ -35,16 +35,10 @@ namespace Carting.Controllers.V1
 
         // POST api/<CartController>/5
         [HttpPost("{id}")]
-        public IActionResult Post(string id, [FromBody] Item value)
-        {        
-            return _cartService.AddItem(id, value) ? Ok() : BadRequest();
-        }
+        public IActionResult Post(string id, [FromBody] Item value) => _cartService.AddItem(id, value) ? Ok() : BadRequest();
 
         // DELETE api/<CartController>/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id, [FromBody] int itemId)
-        {
-            return _cartService.RemoveItem(id, itemId) ? Ok() : BadRequest();
-        }
+        public IActionResult Delete(string id, [FromBody] int itemId) => _cartService.RemoveItem(id, itemId) ? Ok() : BadRequest();
     }
 }

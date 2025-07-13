@@ -15,7 +15,8 @@ namespace Carting.BLL.Services
 
         public bool AddItem(string cartId, Item item)
         {
-            if (string.IsNullOrWhiteSpace(cartId)) { 
+            if (string.IsNullOrWhiteSpace(cartId))
+            {
                 return false;
             }
 
@@ -28,8 +29,7 @@ namespace Carting.BLL.Services
             // If there was no cart for specified key – creates it.
             if (cart == null || string.IsNullOrEmpty(cart?.Id))
             {
-                cart = new Cart();
-                cart.Code = cartId;
+                cart = new Cart() { Code = cartId };
                 _repository.InsertDocument(cart);
             }
 
@@ -69,7 +69,7 @@ namespace Carting.BLL.Services
                 return false;
             }
 
-            if (itemId < 0) 
+            if (itemId < 0)
             {
                 return false;
             }
@@ -81,7 +81,8 @@ namespace Carting.BLL.Services
             }
 
             Item itemToDelete = cart.GetItem(itemId);
-            if (itemToDelete == null) { 
+            if (itemToDelete == null)
+            {
                 return false;
             }
 
@@ -93,9 +94,6 @@ namespace Carting.BLL.Services
             return _repository.UpdateDocument(cart);
         }
 
-        public bool UpdateDocument(Cart item)
-        {
-            return _repository.UpdateDocument(item);
-        }
+        public bool UpdateDocument(Cart item) => _repository.UpdateDocument(item);
     }
 }

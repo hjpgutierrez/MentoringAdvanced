@@ -5,6 +5,9 @@ project.lock.json
 *.pyc
 nupkg/
 
+# sonarqube
+.sonarqube/
+
 # Visual Studio Code
 .vscode/*
 !.vscode/settings.json

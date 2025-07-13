@@ -9,7 +9,7 @@ namespace Carting.DAL.Persistence
     {
         private readonly IMongoDatabase _database;
         private IMongoCollection<TEntity> _collection;
-        private IMongoCollection<Cart> _newCollection;
+        private IMongoCollection<Cart>? _newCollection;
 
         public ILogger<Repository<TEntity>> _logger { get; }
 
@@ -37,14 +37,11 @@ namespace Carting.DAL.Persistence
             return true;
         }
 
-        public TEntity GetDocumentById(string code)
-        {
-           return  _collection.Find(x => x.Code == code).FirstOrDefault();            
-        }
+        public TEntity GetDocumentById(string id) => _collection.Find(x => x.Code == id).FirstOrDefault();
 
-        public bool DeleteDocument(string code)
+        public bool DeleteDocument(string id)
         {
-            _collection.DeleteOne(x => x.Code == code);
+            _collection.DeleteOne(x => x.Code == id);
             return true;
         }
 
@@ -60,10 +57,11 @@ namespace Carting.DAL.Persistence
                 var documents = _newCollection.Find(filter).ToList();
                 return documents;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 _logger.LogError(ex, ex.Message);
                 return Array.Empty<Cart>();
-            }            
+            }
         }
     }
 }

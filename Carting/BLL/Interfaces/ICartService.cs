@@ -4,7 +4,7 @@ namespace Carting.BLL.Interfaces
 {
     public interface ICartService
     {
-        Cart GetCart(string cartId);
+        Cart? GetCart(string cartId);
 
         bool AddItem(string cartId, Item item);
 

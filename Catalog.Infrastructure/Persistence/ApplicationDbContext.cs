@@ -1,13 +1,13 @@
 ﻿using System.Reflection;
 using Catalog.Application.Common.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Catalog.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalog.Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public ApplicationDbContext(DbContextOptions options) 
+        public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
         }
@@ -17,18 +17,18 @@ namespace Catalog.Infrastructure.Persistence
 
         public DbSet<Product> Products => Set<Product>();
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            foreach (var property in builder.Model.GetEntityTypes()
+            foreach (var property in modelBuilder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetProperties())
                 .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
             {
                 property.SetPrecision(18);
                 property.SetScale(2);
-            }            
+            }
 
-            base.OnModelCreating(builder);
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }

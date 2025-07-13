@@ -26,7 +26,9 @@
                     .ToList();
 
                 if (failures.Any())
+                {
                     throw new Exceptions.ValidationException(failures);
+                }
             }
 
             return await next();

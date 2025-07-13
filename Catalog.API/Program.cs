@@ -1,4 +1,4 @@
-using Catalog.Application;
+﻿using Catalog.Application;
 using Catalog.Infrastructure;
 using Catalog.Infrastructure.Persistence;
 using FluentValidation;

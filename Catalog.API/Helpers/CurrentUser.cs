@@ -1,5 +1,5 @@
-﻿using Catalog.Application.Common.Interfaces;
-using System.Security.Claims;
+﻿using System.Security.Claims;
+using Catalog.Application.Common.Interfaces;
 
 
 namespace Catalog.API.Helpers;

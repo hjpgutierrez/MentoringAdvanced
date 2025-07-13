@@ -1,10 +1,10 @@
 ﻿namespace Carting.Middleware
 {
-    using Microsoft.AspNetCore.Http;
-    using Microsoft.Extensions.Logging;
     using System.IdentityModel.Tokens.Jwt;
     using System.Text;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Logging;
 
     public class AccessTokenLoggingMiddleware
     {
