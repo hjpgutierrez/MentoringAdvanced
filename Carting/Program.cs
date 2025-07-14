@@ -34,9 +34,12 @@ namespace Carting
             });
             builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
-            // Add services to the container.
+            // Add services to the containers.
             builder.Services.Configure<DatabaseSettings>(
                 builder.Configuration.GetSection("CartDatabase"));
+
+            builder.Services.Configure<MessageBrokerSettings>(
+                builder.Configuration.GetSection("MessageBroker"));
 
             builder.Services.AddControllers();
             builder.Services.AddApiVersioning(options =>

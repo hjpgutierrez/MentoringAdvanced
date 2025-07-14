@@ -2,6 +2,7 @@
 using System.Text.Json;
 using Catalog.Application.Common.Interfaces;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
 namespace Catalog.Infrastructure.MessageBrokers
@@ -9,16 +10,17 @@ namespace Catalog.Infrastructure.MessageBrokers
     public class RabbitMqMessagePublisher : IMessagePublisher
     {
         private readonly ILogger<RabbitMqMessagePublisher> _logger;
+        private string _hostName;
 
-        public RabbitMqMessagePublisher(ILogger<RabbitMqMessagePublisher> logger)
+        public RabbitMqMessagePublisher(ILogger<RabbitMqMessagePublisher> logger, IOptions<MessageBrokerSettings> options)
         {
             _logger = logger;
+            _hostName = options.Value.HostName;
         }
 
         public async Task PublishAsync<T>(T message, string routingKey)
         {
-
-            var factory = new ConnectionFactory { HostName = "localhost" };
+            var factory = new ConnectionFactory { HostName = _hostName };
             using var connection = await factory.CreateConnectionAsync();
             using var channel = await connection.CreateChannelAsync();
             await channel.QueueDeclareAsync(queue: routingKey, durable: false, exclusive: false, autoDelete: false, arguments: null);
