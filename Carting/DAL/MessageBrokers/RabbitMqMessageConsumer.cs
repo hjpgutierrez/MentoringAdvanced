@@ -11,19 +11,23 @@ public class RabbitMqMessageConsumer : BackgroundService
     private readonly IServiceProvider _serviceProvider;
     private IConnection? _connection;
     private IChannel? _channel;
-    private string _hostName;
+    private string _connectionString;
 
     public RabbitMqMessageConsumer(IServiceProvider serviceProvider, IOptions<MessageBrokerSettings> options)
     {
         _serviceProvider = serviceProvider;
         _connection = null;
         _channel = null;
-        _hostName = options.Value.HostName;
+        _connectionString = options.Value.ConnectionString;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var factory = new ConnectionFactory { HostName = _hostName };
+        using var scope = _serviceProvider.CreateScope();
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<RabbitMqMessageConsumer>>();
+       logger.LogInformation("CString: " + _connectionString);
+
+        var factory = new ConnectionFactory { Uri = new Uri (_connectionString) };
         _connection = await factory.CreateConnectionAsync();
         _channel = await _connection.CreateChannelAsync();
         await _channel.QueueDeclareAsync(queue: ProductQueue, durable: false, exclusive: false, autoDelete: false, arguments: null);

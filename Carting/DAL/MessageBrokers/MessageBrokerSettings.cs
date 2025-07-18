@@ -2,5 +2,5 @@
 
 public class MessageBrokerSettings
 {
-    public string HostName { get; set; } = null!;
+    public string ConnectionString { get; set; } = null!;
 }

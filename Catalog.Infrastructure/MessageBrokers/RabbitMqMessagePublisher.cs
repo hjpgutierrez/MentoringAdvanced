@@ -10,17 +10,18 @@ namespace Catalog.Infrastructure.MessageBrokers
     public class RabbitMqMessagePublisher : IMessagePublisher
     {
         private readonly ILogger<RabbitMqMessagePublisher> _logger;
-        private string _hostName;
+        private string _connectionString;
 
         public RabbitMqMessagePublisher(ILogger<RabbitMqMessagePublisher> logger, IOptions<MessageBrokerSettings> options)
         {
             _logger = logger;
-            _hostName = options.Value.HostName;
+            _connectionString = options.Value.ConnectionString;
         }
 
         public async Task PublishAsync<T>(T message, string routingKey)
         {
-            var factory = new ConnectionFactory { HostName = _hostName };
+            _logger.LogInformation("CString: " + _connectionString);
+            var factory = new ConnectionFactory { Uri = new Uri(_connectionString) };
             using var connection = await factory.CreateConnectionAsync();
             using var channel = await connection.CreateChannelAsync();
             await channel.QueueDeclareAsync(queue: routingKey, durable: false, exclusive: false, autoDelete: false, arguments: null);

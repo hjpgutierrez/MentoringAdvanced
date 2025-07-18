@@ -18,6 +18,12 @@ namespace Carting
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Configuration
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                                .AddEnvironmentVariables();
+
             string domain = $"https://{builder.Configuration["Auth0:Domain"]}/";
             // Configure Authentication with JWT Bearer
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

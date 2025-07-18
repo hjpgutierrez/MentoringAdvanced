@@ -1,0 +1,112 @@
+version: "3.9"
+
+services:
+    rabbitmq:
+        image: rabbitmq:management
+        container_name: rabbitmq
+        ports:
+            - "5672:5672" # Default port for RabbitMQ
+            - "15672:15672" # Default port for RabbitMQ Management UI
+        environment:
+            RABBITMQ_DEFAULT_USER: guest
+            RABBITMQ_DEFAULT_PASS: guest
+        healthcheck:
+            test: ["CMD-SHELL", "rabbitmqctl status || exit 1"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    mongodb:
+        image: mongo:latest
+        container_name: mongodb
+        ports:
+            - "27017:27017" # Default port for MongoDB
+        volumes:
+            - mongodb_data:/data/db # Persistent storage
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: example
+        healthcheck:
+            test:
+                [
+                    "CMD-SHELL",
+                    'mongo --eval ''db.adminCommand("ping")'' || exit 1',
+                ]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    mssql:
+        image: mcr.microsoft.com/mssql/server:latest
+        container_name: mssql
+        ports:
+            - "1433:1433" # Default port for MS SQL Server
+        environment:
+            ACCEPT_EULA: "Y" # Required to accept the license agreement
+            SA_PASSWORD: "YourStrongPassword123" # Set a strong password for the 'sa' user
+        volumes:
+            - mssql_data:/var/opt/mssql # Persistent storage
+
+    carting-api:
+        build:
+            context: . # Ensure the build context includes the root directory
+            dockerfile: Carting/Dockerfile
+        container_name: carting-api
+        ports:
+            - "8090:8090"
+        environment:
+            - CartDatabase__ConnectionString=mongodb://root:example@mongodb:27017
+            - MessageBroker__ConnectionString=amqp://guest:guest@rabbitmq:5672
+            - ASPNETCORE_URLS=http://+:8090
+        depends_on:
+            - mongodb
+            - rabbitmq
+        command:
+            [
+                "/usr/bin/wait-for-it.sh",
+                "mongodb:27017",
+                "--timeout=30",
+                "--strict",
+                "--",
+                "/usr/bin/wait-for-it.sh",
+                "rabbitmq:5672",
+                "--timeout=30",
+                "--strict",
+                "--",
+                "dotnet",
+                "Carting.dll",
+            ]
+
+    catalog-api:
+        build:
+            context: . # Ensure the build context includes the root directory
+            dockerfile: Catalog.API/Dockerfile
+        container_name: catalog-api
+        ports:
+            - "9080:9080"
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=mssql,1433;Database=Catalog;User Id=sa;Password=YourStrongPassword123;TrustServerCertificate=true
+            - MessageBroker__ConnectionString=amqp://guest:guest@rabbitmq:5672
+            - ASPNETCORE_URLS=http://+:9080
+        depends_on:
+            - mssql
+            - rabbitmq
+        command:
+            [
+                "/usr/bin/wait-for-it.sh",
+                "mssql:1433",
+                "--timeout=30",
+                "--strict",
+                "--",
+                "/usr/bin/wait-for-it.sh",
+                "rabbitmq:5672",
+                "--timeout=30",
+                "--strict",
+                "--",
+                "dotnet",
+                "Catalog.API.dll",
+            ]
+
+volumes:
+    mongodb_data:
+    mssql_data:
