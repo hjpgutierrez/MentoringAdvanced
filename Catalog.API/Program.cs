@@ -36,20 +36,10 @@ namespace Catalog.API
 
 
             var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                await app.InitialiseDatabaseAsync();
-            }
-            else
-            {
-                // see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+            await app.InitialiseDatabaseAsync();
+            
 
             app.UseHealthChecks("/health");
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseOpenApi();
             app.UseSwaggerUi();
