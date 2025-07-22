@@ -1,6 +1,44 @@
 version: "3.9"
 
 services:
+    carting-api:
+        build:
+            context: .
+            dockerfile: Carting/Dockerfile
+        container_name: carting-api
+        ports:
+            - "8090:8090"
+        environment:
+            - CartDatabase__ConnectionString=mongodb://root:example@mongodb:27017
+            - MessageBroker__ConnectionString=amqp://guest:guest@rabbitmq:5672
+            - ASPNETCORE_URLS=http://+:8090
+        depends_on:
+            mongodb:
+                condition: service_healthy
+                restart: true
+            rabbitmq:
+                condition: service_healthy
+                restart: true
+
+    catalog-api:
+        build:
+            context: .
+            dockerfile: Catalog.API/Dockerfile
+        container_name: catalog-api
+        ports:
+            - "9080:9080"
+        environment:
+            - ConnectionStrings__DefaultConnection=Server=mssql,1433;Database=Catalog;User Id=sa;Password=YourStrongPassword123;TrustServerCertificate=true
+            - MessageBroker__ConnectionString=amqp://guest:guest@rabbitmq:5672
+            - ASPNETCORE_URLS=http://+:9080
+        depends_on:
+            mssql:
+                condition: service_healthy
+                restart: true
+            rabbitmq:
+                condition: service_healthy
+                restart: true
+
     rabbitmq:
         image: rabbitmq:management
         container_name: rabbitmq
@@ -12,7 +50,7 @@ services:
             RABBITMQ_DEFAULT_PASS: guest
         healthcheck:
             test: ["CMD-SHELL", "rabbitmqctl status || exit 1"]
-            interval: 10s
+            interval: 15s
             timeout: 5s
             retries: 5
 
@@ -27,12 +65,8 @@ services:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: example
         healthcheck:
-            test:
-                [
-                    "CMD-SHELL",
-                    'mongo --eval ''db.adminCommand("ping")'' || exit 1',
-                ]
-            interval: 10s
+            test: ["CMD-SHELL", "pgrep mongod > /dev/null || exit 1"]
+            interval: 15s
             timeout: 5s
             retries: 5
 
@@ -46,66 +80,12 @@ services:
             SA_PASSWORD: "YourStrongPassword123" # Set a strong password for the 'sa' user
         volumes:
             - mssql_data:/var/opt/mssql # Persistent storage
-
-    carting-api:
-        build:
-            context: . # Ensure the build context includes the root directory
-            dockerfile: Carting/Dockerfile
-        container_name: carting-api
-        ports:
-            - "8090:8090"
-        environment:
-            - CartDatabase__ConnectionString=mongodb://root:example@mongodb:27017
-            - MessageBroker__ConnectionString=amqp://guest:guest@rabbitmq:5672
-            - ASPNETCORE_URLS=http://+:8090
-        depends_on:
-            - mongodb
-            - rabbitmq
-        command:
-            [
-                "/usr/bin/wait-for-it.sh",
-                "mongodb:27017",
-                "--timeout=30",
-                "--strict",
-                "--",
-                "/usr/bin/wait-for-it.sh",
-                "rabbitmq:5672",
-                "--timeout=30",
-                "--strict",
-                "--",
-                "dotnet",
-                "Carting.dll",
-            ]
-
-    catalog-api:
-        build:
-            context: . # Ensure the build context includes the root directory
-            dockerfile: Catalog.API/Dockerfile
-        container_name: catalog-api
-        ports:
-            - "9080:9080"
-        environment:
-            - ConnectionStrings__DefaultConnection=Server=mssql,1433;Database=Catalog;User Id=sa;Password=YourStrongPassword123;TrustServerCertificate=true
-            - MessageBroker__ConnectionString=amqp://guest:guest@rabbitmq:5672
-            - ASPNETCORE_URLS=http://+:9080
-        depends_on:
-            - mssql
-            - rabbitmq
-        command:
-            [
-                "/usr/bin/wait-for-it.sh",
-                "mssql:1433",
-                "--timeout=30",
-                "--strict",
-                "--",
-                "/usr/bin/wait-for-it.sh",
-                "rabbitmq:5672",
-                "--timeout=30",
-                "--strict",
-                "--",
-                "dotnet",
-                "Catalog.API.dll",
-            ]
+        healthcheck:
+            test: ["CMD-SHELL", "pidof sqlservr > /dev/null || exit 1"]
+            interval: 15s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
 
 volumes:
     mongodb_data:

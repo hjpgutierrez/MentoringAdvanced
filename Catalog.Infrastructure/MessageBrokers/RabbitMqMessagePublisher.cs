@@ -20,7 +20,6 @@ namespace Catalog.Infrastructure.MessageBrokers
 
         public async Task PublishAsync<T>(T message, string routingKey)
         {
-            _logger.LogInformation("CString: " + _connectionString);
             var factory = new ConnectionFactory { Uri = new Uri(_connectionString) };
             using var connection = await factory.CreateConnectionAsync();
             using var channel = await connection.CreateChannelAsync();

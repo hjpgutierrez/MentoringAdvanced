@@ -8,10 +8,6 @@ EXPOSE 8090
 COPY Directory.Build.props Directory.Build.props
 COPY Directory.Packages.props Directory.Packages.props
 
-# Copy wait-for-it.sh into the container
-COPY wait-for-it.sh /usr/bin/wait-for-it.sh
-RUN chmod +x /usr/bin/wait-for-it.sh
-
 # Copy the CSPROJ file and restore dependencies
 COPY Carting/*.csproj ./Carting/
 RUN dotnet restore Carting/Carting.csproj

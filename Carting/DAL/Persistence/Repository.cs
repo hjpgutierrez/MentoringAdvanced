@@ -16,7 +16,6 @@ namespace Carting.DAL.Persistence
         public Repository(IOptions<DatabaseSettings> databaseSettings, ILogger<Repository<TEntity>> logger)
         {
             _logger = logger;
-            _logger.LogInformation("CString: " + databaseSettings.Value.ConnectionString);
             var mongoClient = new MongoClient(
             databaseSettings.Value.ConnectionString);
 

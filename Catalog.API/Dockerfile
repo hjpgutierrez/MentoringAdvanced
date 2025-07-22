@@ -6,9 +6,7 @@ EXPOSE 9080
 # Copy the centralized props files
 COPY Directory.Build.props Directory.Build.props
 COPY Directory.Packages.props Directory.Packages.props
-# Copy wait-for-it.sh into the container
-COPY wait-for-it.sh /usr/bin/wait-for-it.sh
-RUN chmod +x /usr/bin/wait-for-it.sh
+
 # Copy the CSPROJ file and restore dependencies
 COPY Catalog.API/*.csproj ./Catalog.API/
 COPY Catalog.Domain/*.csproj ./Catalog.Domain/

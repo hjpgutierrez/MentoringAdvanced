@@ -23,11 +23,9 @@ public class RabbitMqMessageConsumer : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        using var scope = _serviceProvider.CreateScope();
-        var logger = scope.ServiceProvider.GetRequiredService<ILogger<RabbitMqMessageConsumer>>();
-       logger.LogInformation("CString: " + _connectionString);
-
         var factory = new ConnectionFactory { Uri = new Uri (_connectionString) };
+        factory.AutomaticRecoveryEnabled = true;
+        factory.NetworkRecoveryInterval = TimeSpan.FromSeconds(30);
         _connection = await factory.CreateConnectionAsync();
         _channel = await _connection.CreateChannelAsync();
         await _channel.QueueDeclareAsync(queue: ProductQueue, durable: false, exclusive: false, autoDelete: false, arguments: null);
