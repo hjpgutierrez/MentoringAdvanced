@@ -18,6 +18,12 @@ namespace Carting
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Configuration
+                                .SetBasePath(Directory.GetCurrentDirectory())
+                                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                                .AddEnvironmentVariables();
+
             string domain = $"https://{builder.Configuration["Auth0:Domain"]}/";
             // Configure Authentication with JWT Bearer
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -34,9 +40,12 @@ namespace Carting
             });
             builder.Services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
 
-            // Add services to the container.
+            // Add services to the containers.
             builder.Services.Configure<DatabaseSettings>(
                 builder.Configuration.GetSection("CartDatabase"));
+
+            builder.Services.Configure<MessageBrokerSettings>(
+                builder.Configuration.GetSection("MessageBroker"));
 
             builder.Services.AddControllers();
             builder.Services.AddApiVersioning(options =>

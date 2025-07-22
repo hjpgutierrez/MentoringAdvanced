@@ -70,7 +70,7 @@ namespace Catalog.API.IntegrationTests
 
         private async Task<string> GetAccessTokenAsync()
         {
-            using var authClient = new HttpClient();       
+            using var authClient = new HttpClient();
 
             // Prepare the request payload
             var requestBody = new

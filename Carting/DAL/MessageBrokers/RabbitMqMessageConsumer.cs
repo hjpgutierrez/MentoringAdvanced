@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using Carting.BLL.Interfaces;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -10,17 +11,21 @@ public class RabbitMqMessageConsumer : BackgroundService
     private readonly IServiceProvider _serviceProvider;
     private IConnection? _connection;
     private IChannel? _channel;
+    private string _connectionString;
 
-    public RabbitMqMessageConsumer(IServiceProvider serviceProvider)
+    public RabbitMqMessageConsumer(IServiceProvider serviceProvider, IOptions<MessageBrokerSettings> options)
     {
         _serviceProvider = serviceProvider;
         _connection = null;
         _channel = null;
+        _connectionString = options.Value.ConnectionString;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var factory = new ConnectionFactory { HostName = "localhost" };
+        var factory = new ConnectionFactory { Uri = new Uri (_connectionString) };
+        factory.AutomaticRecoveryEnabled = true;
+        factory.NetworkRecoveryInterval = TimeSpan.FromSeconds(30);
         _connection = await factory.CreateConnectionAsync();
         _channel = await _connection.CreateChannelAsync();
         await _channel.QueueDeclareAsync(queue: ProductQueue, durable: false, exclusive: false, autoDelete: false, arguments: null);
@@ -64,5 +69,4 @@ public class RabbitMqMessageConsumer : BackgroundService
             await _channel!.BasicNackAsync(eventArgument.DeliveryTag, false, requeue: true);
         }
     }
-
 }

@@ -15,6 +15,7 @@ namespace Catalog.Infrastructure
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
+            // SQL Server
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
             Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
@@ -32,7 +33,13 @@ namespace Catalog.Infrastructure
             services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
             services.AddScoped<ApplicationDbContextInitialiser>();
             services.AddSingleton(TimeProvider.System);
+
+            // Message Broker
+
+            services.Configure<MessageBrokerSettings>(configuration.GetSection("MessageBroker"));
             services.AddSingleton<IMessagePublisher, RabbitMqMessagePublisher>();
+
+
             return services;
         }
     }

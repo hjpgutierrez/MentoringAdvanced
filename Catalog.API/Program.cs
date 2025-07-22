@@ -15,6 +15,11 @@ namespace Catalog.API
 
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Configuration
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddEnvironmentVariables();
+
             // Add services to the container.
             builder.Services.AddApplicationServices();
             builder.Services.AddInfrastructureServices(builder.Configuration);
@@ -31,20 +36,10 @@ namespace Catalog.API
 
 
             var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                await app.InitialiseDatabaseAsync();
-            }
-            else
-            {
-                // see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+            await app.InitialiseDatabaseAsync();
+            
 
             app.UseHealthChecks("/health");
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseOpenApi();
             app.UseSwaggerUi();

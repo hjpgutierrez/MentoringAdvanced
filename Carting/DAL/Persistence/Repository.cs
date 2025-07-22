@@ -15,6 +15,7 @@ namespace Carting.DAL.Persistence
 
         public Repository(IOptions<DatabaseSettings> databaseSettings, ILogger<Repository<TEntity>> logger)
         {
+            _logger = logger;
             var mongoClient = new MongoClient(
             databaseSettings.Value.ConnectionString);
 
@@ -22,7 +23,7 @@ namespace Carting.DAL.Persistence
                 databaseSettings.Value.DatabaseName);
 
             _collection = _database.GetCollection<TEntity>(databaseSettings.Value.CollectionName);
-            _logger = logger;
+            
         }
 
         public bool InsertDocument(TEntity item)
